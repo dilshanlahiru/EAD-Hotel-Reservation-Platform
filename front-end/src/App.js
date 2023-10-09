@@ -27,7 +27,6 @@ function App() {
 
           <Route path='/travellearTable' element={<TraverlerTable/>}/>
           <Route path='/travelerForm' element={<TraverlerForm/>}/>
-
           
           <Route path='/userReg' element={<UserReg/>}/>
           <Route path='/userTable' element={<UserTable/>}/>
