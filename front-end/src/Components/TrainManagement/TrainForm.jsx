@@ -1,8 +1,51 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import TrainService from "../Service/TrainService";
+import Swal from "sweetalert2";
 
 const TrainForm = () => {
+  const [id, setId] = useState("");
+  const [trainName, setTrainName] = useState("");
+  const [note, setNote] = useState("");
+  const [status, setStatus] = useState(0);
+
+  const { trainId } = useParams();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (trainId) {
+      TrainService.getTrainById(trainId).then((response) => {
+        setId(response.id)
+        setTrainName(response.trainName);
+        setNote(response.note);
+        console.log(response);
+      });
+    }
+  }, []);
+
+  const submitTrain = (e) => {
+    e.preventDefault();
+    const train = {id, trainName, status, note};
+
+    if (trainId) {
+      TrainService.updateTrain(train).then((response) => {
+        Swal.fire("Success", "Train Updated Successfully", "success");
+        navigate("/trainTable");
+      });
+    } else {
+      TrainService.createTrain(train)
+        .then((response) => {
+          Swal.fire("Success", "Train Added Successfully", "success");
+          navigate("/trainTable");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  };
+  
+
   return (
     <div>
       <div className="row">
@@ -11,86 +54,28 @@ const TrainForm = () => {
           style={{ maxWidth: 900, marginLeft: 180, borderRadius: 30 }}
         >
           <div class="card-body">
-            <h2 class="card-title mt-1">Add Notice</h2>
-            <form
-            //   onSubmit={submitNotice}
-            >
+            <h2 class="card-title mt-1">Add Train</h2>
+            <form onSubmit={submitTrain}>
               <div>
-                <div className="row w-50  mx-auto mt-5">
-                  <strong className="col-sm-3  col-form-label">Faculty</strong>
-
-                  <select
-                    class="form-select w-75"
-                    aria-label="Default select example"
-                    //   value={faculty}
-                    required
-                    placeholder="SelectFaculty.."
-                    //   onChange={(e) => {
-                    //     setFaculty(e.target.value);
-                    //   }}
-                  >
-                    <option value="">Select faculty </option>
-                    <option value="Faculty of Computing">
-                      Faculty of Computing
-                    </option>
-                    <option value="Faculty of Business">
-                      Faculty of Business
-                    </option>
-                    <option value="Faculty of Engineering">
-                      Faculty of Engineering
-                    </option>
-                  </select>
-                </div>
-                <div className="row w-50  mx-auto mt-3">
-                  <strong
-                    style={{ marginLeft: -9 }}
-                    className="col-sm-3 col-form-label"
-                  >
-                    Date
-                  </strong>
-                  <input
-                    name="date"
-                    className="form-control w-75"
-                    placeholder="Add Topic..."
-                    type="date"
-                    //   value={date}
-                    //   onChange={(e) => {
-                    //     setDate(e.target.value);
-                    //   }}
-                    style={{ marginLeft: 9 }}
-                    required
-                  />
-
-                  {/* <select class="form-select w-75" 
-                                aria-label="Default select example"
-                                value={module.value}
-                                required
-                                placeholder='SelectModule..'
-                                onChange={(e) => {setModule(e.target.value);}}>
-                                <option value="">select Module</option>
-                                <option value="SE3050-User Experiance Engineering">SE3050-User Experiance Engineering</option>
-                                <option value="SE3060-Application Framework">SE3060-Application Framework</option>
-                                <option value="SE3090-Softwre Architecture">SE3090-Softwre Architecture</option>
-                        </select> */}
-                </div>
+                
                 <div className="row w-50  mx-auto mt-3">
                   <strong
                     style={{ marginLeft: -9 }}
                     className="col-sm-3  col-form-label"
                   >
-                    Topic
+                    Train Name
                   </strong>
                   <input
-                    name="topic"
+                    name="trainName"
                     style={{ marginLeft: 9 }}
                     className="form-control w-75"
-                    placeholder="Add Topic..."
+                    placeholder="Add Name..."
                     type="text"
-                    //   value={topic}
-                    //   minLength="5"
-                    //   onChange={(e) => {
-                    //     setTopic(e.target.value);
-                    //   }}
+                    value={trainName}
+                    minLength="1"
+                    onChange={(e) => {
+                      setTrainName(e.target.value);
+                    }}
                     required
                   />
                 </div>
@@ -100,20 +85,20 @@ const TrainForm = () => {
                     style={{ marginLeft: -3 }}
                     className="col-sm-3  col-form-label"
                   >
-                    Notice
+                    Note
                   </strong>
 
                   <textarea
-                    name="notice"
+                    name="note"
                     style={{ marginLeft: 3 }}
                     className="form-control w-75"
                     placeholder="Add notice...."
                     type="text"
-                    //   value={notice}
-                    //   minLength="5"
-                    //   onChange={(e) => {
-                    //     setNotice(e.target.value);
-                    //   }}
+                    value={note}
+                    minLength="5"
+                    onChange={(e) => {
+                      setNote(e.target.value);
+                    }}
                     required
                   />
                 </div>
@@ -132,12 +117,7 @@ const TrainForm = () => {
             </form>
           </div>
         </div>
-        {/* <div
-      class="card  text-bg-white shadow-lg mb-3 mt-5 text-center p-4"
-      style={{ maxWidth: 350, marginLeft: 50 }}
-    >
-      <Calendar setCalander={setCalander} value={calander}></Calendar>
-    </div> */}
+        
       </div>
     </div>
   );

@@ -81,7 +81,7 @@ const Home = () => {
                       alt="Card image cap"
                     />
                     {/* <h4 class="card-title"></h4> */}
-                    <Link className="btn btn-primary" to={"/users"}>
+                    <Link className="btn btn-primary" to={"/trainTable"}>
                       Train Management
                     </Link>
                   </div>

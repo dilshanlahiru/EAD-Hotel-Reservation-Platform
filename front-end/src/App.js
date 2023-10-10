@@ -10,6 +10,7 @@ import TraverlerTable from './Components/TraverlerManage/TraverlerTable';
 import TraverlerForm from './Components/TraverlerManage/TraverlerForm';
 import UserReg from './Components/UserManagement/UserReg';
 import UserTable from './Components/UserManagement/UserTable';
+import ScheduleTable from './Components/TrainManagement/ScheduleTable';
 
 function App() {
   return (
@@ -22,8 +23,11 @@ function App() {
           <Route path='/ticketBookingTable' element={<TicketBookingTable/>}/>
           <Route path='/ticketForm' element={<TicketForm/>}/>
 
-          <Route path='/trainBookingTable' element={<TrainTable/>}/>
+          <Route path='/trainTable' element={<TrainTable/>}/>
           <Route path='/trainForm' element={<TrainForm/>}/>
+          <Route path='/trainForm/:trainId' element={<TrainForm/>}/>
+          <Route path='/scheduleTable' element={<ScheduleTable/>}/>
+
 
           <Route path='/travellearTable' element={<TraverlerTable/>}/>
           <Route path='/travelerForm' element={<TraverlerForm/>}/>

@@ -5,7 +5,7 @@ import TrainService from "../Service/TrainService";
 import Swal from "sweetalert2";
 
 
-const TrainTable = () => {
+const ScheduleTable = () => {
   const [search, setSearch] = useState("");
   const [trainList, setTrainList] = useState([]);
   const navigate = useNavigate();
@@ -160,4 +160,4 @@ const TrainTable = () => {
   );
 };
 
-export default TrainTable;
+export default ScheduleTable;
