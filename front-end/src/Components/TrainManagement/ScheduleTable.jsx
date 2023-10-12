@@ -1,24 +1,37 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useParams } from "react-router-dom";
 import TrainService from "../Service/TrainService";
 import Swal from "sweetalert2";
+import ScheduleService from "../Service/ScheduleService";
 
 
 const ScheduleTable = () => {
   const [search, setSearch] = useState("");
-  const [trainList, setTrainList] = useState([]);
+  const [scheduleList, setScheduleList] = useState([]);
+  const [trainName, setTrainName] = useState("");
+
   const navigate = useNavigate();
+  const { trainId } = useParams();
 
   useEffect(() => {
-    TrainService.getAllTrains().then((data) => {
-      setTrainList(data);
-      console.log(data);
-    });
+    if(trainId){
+      TrainService.getTrainById(trainId).then((response) => {
+        setTrainName(response.trainName)
+        console.log(response);
+      });
+      ScheduleService.getSchduleByTrainId(trainId).then((data) => {
+        setScheduleList(data);
+        console.log(data);
+      });
+    }
+    
   }, []);
 
+  console.log("trainDetails", trainName);
 
-  const deleteTrain = (trainId) => {
+
+  const deleteSchedule = (scheduleId) => {
 
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
@@ -39,9 +52,9 @@ const ScheduleTable = () => {
     }).then((result) => {
 
       if (result.isConfirmed) {
-        TrainService.deleteTrain(trainId)
+        ScheduleService.deleteSchedule(scheduleId)
         .then((res) => {      
-          setTrainList(trainList.filter((trainList) => trainList.id !== trainId));
+          setScheduleList(scheduleList.filter((scheduleList) => scheduleList.id !== scheduleId));
         })
         .catch((error) => {
           console.log(error);
@@ -70,7 +83,7 @@ const ScheduleTable = () => {
   return (
     <div className="p-3">
       <div className=" boxnotice card text-center p-3 mt-1">
-        <h1>Trains</h1>
+        <h1> {trainName} Train Schedule</h1>
 
         <div>
           <div className="container p-1 mt-4 mb-4">
@@ -80,9 +93,9 @@ const ScheduleTable = () => {
                   <Link
                     className="btn btn-primary mt-3 p-2"
                     style={{ width: 190 }}
-                    to={"/trainForm"}
+                    to={`/scheduleForm/${trainId}`}
                   >
-                    Add Train &nbsp;
+                    Add Schedule &nbsp;
                     <i class="fa fa-plus-circle" aria-hidden="true"></i>
                   </Link>
 
@@ -99,38 +112,34 @@ const ScheduleTable = () => {
                 <table class="table table-striped mt-3">
                   <thead className="table-primary">
                     <tr>
-                      <th scope="col">Train Name</th>
-                      <th scope="col">Note</th>
-                      <th scope="col">Actions</th>  
+                      <th scope="col">Start</th>
+                      <th scope="col">Start Time</th>
+                      <th scope="col">End</th>  
+                      <th scope="col">End Time</th>  
+                      <th scope="col">Actions</th> 
                     </tr>
                   </thead>
                   <tbody>
-            {trainList?.filter((value) => {
+            {scheduleList?.filter((value) => {
               if (search === "") {
                 return value;
               } else if (
                 //value.id.toString(includes(search))
-                value.trainName.toLowerCase().includes(search.toLowerCase()) ) 
+                value.start.toLowerCase().includes(search.toLowerCase()) ) 
                 {
                   return value;
                 }
               return 0;
             }).map((t) => (
               <tr key={t.id}>
-                <td>{t.trainName}</td>
-                <td>{t.note}</td>
+                <td>{t.start}</td>
+                <td>{t.startDateTime}</td>
+                <td>{t.destination}</td>
+                <td>{t.destinationDateTime}</td>
                 <td>
                   <Link
-                    className="btn btn-primary"
-                    to={`/scheduleTable/${t.id}`}
-                  >
-                    Schedules &nbsp;
-                    <i class="fa fa-cog" aria-hidden="true"></i>
-                  </Link>
-                
-                  <Link
                     className="btn btn-warning"
-                    to={`/trainForm/${t.id}`}
+                    to={`/scheduleForm/${trainId}/${t.id}`}
                   >
                     Update &nbsp;
                     <i class="fa fa-cog" aria-hidden="true"></i>
@@ -138,7 +147,7 @@ const ScheduleTable = () => {
                 
                   <button
                     type="button"
-                    onClick={() => deleteTrain(t.id)}
+                    onClick={() => deleteSchedule(t.id)}
                     class="btn btn-danger"
                   > Delete &nbsp;
                     <i class="fa fa-trash" aria-hidden="true"></i> 

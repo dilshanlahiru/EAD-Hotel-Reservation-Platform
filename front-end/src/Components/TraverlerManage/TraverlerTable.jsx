@@ -1,13 +1,136 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import UserService from "../Service/UserService";
+import Swal from "sweetalert2";
 
 const TraverlerTable = () => {
   const [search, setSearch] = useState("");
+  const [userList, setUserList] = useState([]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    UserService.getAllTravelerUsers().then((data) => {
+      setUserList(data);
+      console.log(data);
+    });
+  }, []);
+
+
+
+  const deleteUser = (uId) => {
+
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success', 
+        cancelButton: 'btn btn-danger'
+      },
+      buttonsStyling: false
+    })
+    
+    swalWithBootstrapButtons.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, cancel!',
+      reverseButtons: true
+    }).then((result) => {
+
+      if (result.isConfirmed) {
+        UserService.deleteUserById(uId)
+        .then((res) => {      
+          setUserList(userList.filter((userList) => userList.id !== uId));
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+
+        swalWithBootstrapButtons.fire(
+          'Deleted!',
+          'Your file has been deleted.',
+          'success'
+        )
+      } else if (
+        /* Read more about handling dismissals below */
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+        swalWithBootstrapButtons.fire(
+          'Cancelled',
+          'Delete canceled',
+          'error'
+        )
+      }
+    })
+
+  };
+
+  const changeStatus = (userId, status) => {
+
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success', 
+        cancelButton: 'btn btn-danger'
+      },
+      buttonsStyling: false
+    })
+    
+    swalWithBootstrapButtons.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, cancel!',
+      reverseButtons: true
+    }).then((result) => {
+
+      if (result.isConfirmed) {
+        if(status == 0){
+          UserService.updateStatus(userId, 1)
+          .then((res) => {      
+            setUserList(userList.filter((userList) => userList.id !== userId));
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+
+        }
+        else{
+          UserService.updateStatus(userId, 0)
+          .then((res) => {      
+            setUserList(userList.filter((userList) => userList.id !== userId));
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+
+        }
+        swalWithBootstrapButtons.fire(
+          'Deleted!',
+          'Your file has been deleted.',
+          'success'
+        )
+      } else if (
+        /* Read more about handling dismissals below */
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+        swalWithBootstrapButtons.fire(
+          'Cancelled',
+          'Delete canceled',
+          'error'
+        )
+      }
+    })
+
+  };
+
+
   return (
     <div className="p-3">
       <div className=" boxnotice card text-center p-3 mt-1">
-        <h1>Bookings</h1>
+        <h1>User List</h1>
 
         <div>
           <div className="container p-1 mt-4 mb-4">
@@ -17,98 +140,82 @@ const TraverlerTable = () => {
                   <Link
                     className="btn btn-primary mt-3 p-2"
                     style={{ width: 190 }}
-                    to={"/ticketForm"}
+                    to={"/travelerForm"}
                   >
-                    Add Booking &nbsp;
+                    Add User &nbsp;
                     <i class="fa fa-plus-circle" aria-hidden="true"></i>
                   </Link>
 
                   <input
                     type="text"
-                    placeholder="Search By Notice"
+                    placeholder="Search By Name Or Email"
                     className="form-control
-      mt-3 admin-srchbr1"
+        mt-3 admin-srchbr1"
                     onChange={(e) => {
                       setSearch(e.target.value);
                     }}
                   />
 
-                  <input
-                    type="date"
-                    placeholder="Search By Notice"
-                    className="form-control mt-3 admin-srchbr-date "
-                    onChange={(e) => {
-                      setSearch(e.target.value);
-                    }}
-                  />
-
-                  {/* <button type="button" className="btn btn-success mt-3 admin-cad" onClick={() =>print({
-                      printable: notices, header: 'Announcement Details',
-                      properties:
-                      [
-                      {field: 'faculty', displayName:'Faculty'},
-                      {field: 'date', displayName:'Date'},
-                      {field: 'topic', displayName:'Topic'},
-                      {field: 'notice', displayName:'Notice'},
-                     
-                  ],
-                      type:'json'
-                      })}> 
-                      print Details
-                      &nbsp;
-                      <i class="fa fa-print" aria-hidden="true"></i> </button> */}
                 </div>
                 <table class="table table-striped mt-3">
                   <thead className="table-primary">
                     <tr>
-                      <th scope="col">Faculty</th>
-                      <th scope="col">Date</th>
-                      <th scope="col">Topic</th>
-                      <th scope="col">Notice</th>
+                      <th scope="col">Name</th>
+                      <th scope="col">Email</th>
+                      <th scope="col">Nic</th>
+                      <th scope="col">Status</th>
                       <th scope="col">Action</th>
                       <th></th>
                     </tr>
                   </thead>
-                  {/* <tbody>
-              {notices?.filter((value) => {
-      if (search === "") {
-        return value;
-      } else if (
-        //value.id.toString(includes(search))
-        value.date.toLowerCase().includes(search.toLowerCase()) || value.topic.toLowerCase().includes(search.toLowerCase())
-      ) {
-        return value;
-      }
-      return 0;
-}).map((note) => (
-                <tr key={note.id}>
-                  <td>{note.faculty}</td>
-                  <td>{note.date}</td>
-                  <td>{note.topic}</td>
-                  <td>{note.notice}</td>
-                  <td>
-                    <Link
-                      className="btn btn-warning"
-                      to={`/AdminHome/NoticeTable/NoticeForm/${note._id}`}
-                    >
-                      Update &nbsp;
-                      <i class="fa fa-cog" aria-hidden="true"></i>
-                    </Link>
-                  </td>
-                  
-                  <td>
-                    <button
-                      type="button"
-                      onClick={() => deleteNotice(note._id)}
-                      class="btn btn-danger"
-                    > Delete &nbsp;
-                      <i class="fa fa-trash" aria-hidden="true"></i> 
-                      
-                    </button>
-                  </td> 
-                </tr>
-              ))}
-            </tbody> */}
+                  <tbody>
+                {userList?.filter((value) => {
+                  if (search === "") {
+                    return value;
+                  } else if (
+                    //value.id.toString(includes(search))
+                    value.name.toLowerCase().includes(search.toLowerCase()) || value.email.toLowerCase().includes(search.toLowerCase()
+                      || value.nic.toLowerCase().includes(search.toLowerCase()))
+                  ) {
+                    return value;
+                  }
+                  return 0;
+                }).map((u) => (
+                  <tr key={u.id}>
+                    <td>{u.name}</td>
+                    <td>{u.email}</td>
+                    <td>{u.nic}</td>
+                    <td>{u.status == 0 ? "Active" : "Deactivate"}</td>
+                    <td>
+                      <Link
+                        className="btn btn-warning"
+                        to={`/travelerForm/${u.id}`}
+                      >
+                        Update &nbsp;
+                        <i class="fa fa-cog" aria-hidden="true"></i>
+                      </Link>
+                    
+                      <button
+                        type="button"
+                        onClick={() => deleteUser(u.id)}
+                        class="btn btn-danger"
+                      > Delete &nbsp;
+                        <i class="fa fa-trash" aria-hidden="true"></i> 
+                        
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={() => changeStatus(u.id, u.status)}
+                        class="btn btn-danger"
+                      > Change Status &nbsp;
+                        <i class="fa fa-trash" aria-hidden="true"></i> 
+                        
+                      </button>
+                    </td> 
+                  </tr>
+                ))}
+              </tbody>
                 </table>
                 <br></br>
               </div>

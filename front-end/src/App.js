@@ -11,6 +11,7 @@ import TraverlerForm from './Components/TraverlerManage/TraverlerForm';
 import UserReg from './Components/UserManagement/UserReg';
 import UserTable from './Components/UserManagement/UserTable';
 import ScheduleTable from './Components/TrainManagement/ScheduleTable';
+import ScheduleForm from './Components/TrainManagement/ScheduleForm';
 
 function App() {
   return (
@@ -26,13 +27,17 @@ function App() {
           <Route path='/trainTable' element={<TrainTable/>}/>
           <Route path='/trainForm' element={<TrainForm/>}/>
           <Route path='/trainForm/:trainId' element={<TrainForm/>}/>
-          <Route path='/scheduleTable' element={<ScheduleTable/>}/>
+          <Route path='/scheduleTable/:trainId' element={<ScheduleTable/>}/>             {/* view */}
+          <Route path='/scheduleForm/:trainId' element={<ScheduleForm/>}/>               {/* create */}
+          <Route path='/scheduleForm/:trainId/:scheduleId' element={<ScheduleForm/>}/>   {/* update */}
 
 
           <Route path='/travellearTable' element={<TraverlerTable/>}/>
           <Route path='/travelerForm' element={<TraverlerForm/>}/>
+          <Route path='/travelerForm/:userId' element={<TraverlerForm/>}/>
           
           <Route path='/userReg' element={<UserReg/>}/>
+          <Route path='/userReg/:userId' element={<UserReg/>}/>
           <Route path='/userTable' element={<UserTable/>}/>
           
         </Routes>

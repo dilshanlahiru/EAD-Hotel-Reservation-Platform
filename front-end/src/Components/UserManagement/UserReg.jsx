@@ -1,8 +1,60 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import Swal from "sweetalert2";
+import UserService from "../Service/UserService";
 
 const UserReg = () => {
+  const [id, setId] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [nic, setNic] = useState("");
+  const [roleString, setRoleString] = useState("");
+  const [status, setStatus] = useState(0);
+
+  const { userId } = useParams();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (userId) {
+      UserService.getUserById(userId).then((response) => {
+        setId(response.id)
+        setName(response.name);
+        setEmail(response.email);
+        setNic(response.nic);
+        setRoleString(response.role);
+        console.log(response);
+      });
+    }
+  }, []);
+
+  
+
+
+  const submitUser = (e) => {
+    e.preventDefault();
+    let role = parseInt(roleString)
+    const user = {id, name, email, password, nic, role, status};
+    console.log("u", user);
+
+    if (userId) {
+      UserService.updateUser(user).then((response) => {
+        Swal.fire("Success", "Updated Successfully", "success");
+        navigate("/userTable");
+      });
+    } else {
+      UserService.createUser(user)
+        .then((response) => {
+          Swal.fire("Success", "Added Successfully", "success");
+          navigate("/userTable");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  };
+
   return (
     <div>
       <div className="row">
@@ -11,37 +63,16 @@ const UserReg = () => {
           style={{ maxWidth: 900, marginLeft: 180, borderRadius: 30 }}
         >
           <div class="card-body">
-            <h2 class="card-title mt-1">Add Notice</h2>
+            <h2 class="card-title mt-1">Add User</h2>
             <form
-            //   onSubmit={submitNotice}
+               onSubmit={submitUser}
             >
               <div>
-                <div className="row w-50  mx-auto mt-5">
-                  <strong className="col-sm-3  col-form-label">Faculty</strong>
+                
 
-                  <select
-                    class="form-select w-75"
-                    aria-label="Default select example"
-                    //   value={faculty}
-                    required
-                    placeholder="SelectFaculty.."
-                    //   onChange={(e) => {
-                    //     setFaculty(e.target.value);
-                    //   }}
-                  >
-                    <option value="">Select faculty </option>
-                    <option value="Faculty of Computing">
-                      Faculty of Computing
-                    </option>
-                    <option value="Faculty of Business">
-                      Faculty of Business
-                    </option>
-                    <option value="Faculty of Engineering">
-                      Faculty of Engineering
-                    </option>
-                  </select>
-                </div>
-                <div className="row w-50  mx-auto mt-3">
+
+
+                {/* <div className="row w-50  mx-auto mt-3">
                   <strong
                     style={{ marginLeft: -9 }}
                     className="col-sm-3 col-form-label"
@@ -61,7 +92,7 @@ const UserReg = () => {
                     required
                   />
 
-                  {/* <select class="form-select w-75" 
+                  <select class="form-select w-75" 
                               aria-label="Default select example"
                               value={module.value}
                               required
@@ -71,52 +102,121 @@ const UserReg = () => {
                               <option value="SE3050-User Experiance Engineering">SE3050-User Experiance Engineering</option>
                               <option value="SE3060-Application Framework">SE3060-Application Framework</option>
                               <option value="SE3090-Softwre Architecture">SE3090-Softwre Architecture</option>
-                      </select> */}
-                </div>
+                      </select>
+                </div> */}
+                
                 <div className="row w-50  mx-auto mt-3">
                   <strong
                     style={{ marginLeft: -9 }}
                     className="col-sm-3  col-form-label"
                   >
-                    Topic
+                    Name
                   </strong>
                   <input
-                    name="topic"
+                    name="name"
                     style={{ marginLeft: 9 }}
                     className="form-control w-75"
                     placeholder="Add Topic..."
                     type="text"
-                    //   value={topic}
-                    //   minLength="5"
-                    //   onChange={(e) => {
-                    //     setTopic(e.target.value);
-                    //   }}
+                    value={name}
+                    minLength="5"
+                    onChange={(e) => {
+                      setName(e.target.value);
+                    }}
                     required
                   />
                 </div>
 
                 <div className="row w-50  mx-auto mt-3">
                   <strong
-                    style={{ marginLeft: -3 }}
+                    style={{ marginLeft: -9 }}
                     className="col-sm-3  col-form-label"
                   >
-                    Notice
+                    Email
                   </strong>
-
-                  <textarea
-                    name="notice"
-                    style={{ marginLeft: 3 }}
+                  <input
+                    name="name"
+                    style={{ marginLeft: 9 }}
                     className="form-control w-75"
-                    placeholder="Add notice...."
+                    placeholder="Add Topic..."
                     type="text"
-                    //   value={notice}
-                    //   minLength="5"
-                    //   onChange={(e) => {
-                    //     setNotice(e.target.value);
-                    //   }}
+                    value={email}
+                    minLength="5"
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                    }}
                     required
                   />
                 </div>
+
+                <div className="row w-50  mx-auto mt-3">
+                  <strong
+                    style={{ marginLeft: -9 }}
+                    className="col-sm-3  col-form-label"
+                  >
+                    Password
+                  </strong>
+                  <input
+                    name="name"
+                    style={{ marginLeft: 9 }}
+                    className="form-control w-75"
+                    placeholder="Add Topic..."
+                    type="text"
+                    value={password}
+                    minLength="5"
+                    onChange={(e) => {
+                      setPassword(e.target.value);
+                    }}
+                    required
+                  />
+                </div>
+
+                <div className="row w-50  mx-auto mt-3">
+                  <strong
+                    style={{ marginLeft: -9 }}
+                    className="col-sm-3  col-form-label"
+                  >
+                    NIC
+                  </strong>
+                  <input
+                    name="name"
+                    style={{ marginLeft: 9 }}
+                    className="form-control w-75"
+                    placeholder="Add Topic..."
+                    type="text"
+                    value={nic}
+                    minLength="5"
+                    onChange={(e) => {
+                      setNic(e.target.value);
+                    }}
+                    required
+                  />
+                </div>
+
+                <div className="row w-50  mx-auto mt-5">
+                  <strong className="col-sm-3  col-form-label">Role</strong>
+
+                  <select
+                    class="form-select w-75"
+                    aria-label="Default select example"
+                    value={roleString}
+                    required
+                    placeholder="SelectFaculty.."
+                      onChange={(e) => {
+                        setRoleString(e.target.value);
+                      }}
+                  >
+                    <option value="">Select Role </option>
+                    <option value='0'>
+                      Back Office
+                    </option>
+                    <option value='1'>
+                      Travel Agent
+                    </option>
+                  </select>
+                </div>
+
+                
 
                 <div
                   className="row w-50 mx-auto mt-3 mb-4 "
@@ -132,12 +232,7 @@ const UserReg = () => {
             </form>
           </div>
         </div>
-        {/* <div
-    class="card  text-bg-white shadow-lg mb-3 mt-5 text-center p-4"
-    style={{ maxWidth: 350, marginLeft: 50 }}
-  >
-    <Calendar setCalander={setCalander} value={calander}></Calendar>
-  </div> */}
+        
       </div>
     </div>
   );

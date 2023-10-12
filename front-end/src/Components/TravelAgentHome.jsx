@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-const Home = () => {
+const TravelAgentHome = () => {
   return (
     <div
       className="card w-75 mx-auto mt-5 bg-light p-5 shadow-lg"
@@ -97,4 +97,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default TravelAgentHome;
