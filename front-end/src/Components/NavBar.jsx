@@ -1,9 +1,10 @@
 import React from "react";
+import "./custom.css";
 
 const NavBar = () => {
   return (
     <div>
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <nav class="navbar navbar-expand-lg navbar-light bg-primary">
         <a class="navbar-brand" href="#">
           TravelMEr
         </a>

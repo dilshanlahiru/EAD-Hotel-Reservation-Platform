@@ -54,13 +54,13 @@ const TraverlerForm = () => {
 
   return (
     <div>
-      <div className="row">
+      <div className="row ">
         <div
-          class="card  text-bg-white adminNotice-table mb-3 mt-5 text-center"
-          style={{ maxWidth: 900, marginLeft: 180, borderRadius: 30 }}
+          class="card  text-bg-white adminNotice-table mb-3 mt-5 text-center mx-auto"
+          style={{ maxWidth: 900, borderRadius: 30 }}
         >
           <div class="card-body">
-            <h2 class="card-title mt-1">Add User</h2>
+            <h2 class="card-title mt-1">Add Traveller</h2>
             <form onSubmit={submitUser}>
               <div>
                 {/* <div className="row w-50  mx-auto mt-3">
@@ -107,7 +107,7 @@ const TraverlerForm = () => {
                     name="name"
                     style={{ marginLeft: 9 }}
                     className="form-control w-75"
-                    placeholder="Add Topic..."
+                    placeholder="Add Name..."
                     type="text"
                     value={name}
                     minLength="5"
@@ -129,34 +129,12 @@ const TraverlerForm = () => {
                     name="name"
                     style={{ marginLeft: 9 }}
                     className="form-control w-75"
-                    placeholder="Add Topic..."
+                    placeholder="Add Email..."
                     type="text"
                     value={email}
                     minLength="5"
                     onChange={(e) => {
                       setEmail(e.target.value);
-                    }}
-                    required
-                  />
-                </div>
-
-                <div className="row w-50  mx-auto mt-3">
-                  <strong
-                    style={{ marginLeft: -9 }}
-                    className="col-sm-3  col-form-label"
-                  >
-                    Password
-                  </strong>
-                  <input
-                    name="name"
-                    style={{ marginLeft: 9 }}
-                    className="form-control w-75"
-                    placeholder="Add Topic..."
-                    type="text"
-                    value={password}
-                    minLength="5"
-                    onChange={(e) => {
-                      setPassword(e.target.value);
                     }}
                     required
                   />
@@ -173,12 +151,34 @@ const TraverlerForm = () => {
                     name="name"
                     style={{ marginLeft: 9 }}
                     className="form-control w-75"
-                    placeholder="Add Topic..."
+                    placeholder="Add NIC..."
                     type="text"
                     value={nic}
                     minLength="5"
                     onChange={(e) => {
                       setNic(e.target.value);
+                    }}
+                    required
+                  />
+                </div>
+
+                <div className="row w-50  mx-auto mt-3">
+                  <strong
+                    style={{ marginLeft: -9 }}
+                    className="col-sm-3  col-form-label"
+                  >
+                    Password
+                  </strong>
+                  <input
+                    name="name"
+                    style={{ marginLeft: 9 }}
+                    className="form-control w-75"
+                    placeholder="Add Password..."
+                    type="text"
+                    value={password}
+                    minLength="5"
+                    onChange={(e) => {
+                      setPassword(e.target.value);
                     }}
                     required
                   />
