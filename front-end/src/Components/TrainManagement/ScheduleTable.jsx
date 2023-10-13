@@ -28,9 +28,6 @@ const ScheduleTable = () => {
     
   }, []);
 
-  console.log("trainDetails", trainName);
-
-
   const deleteSchedule = (scheduleId) => {
 
     const swalWithBootstrapButtons = Swal.mixin({
@@ -79,6 +76,20 @@ const ScheduleTable = () => {
 
   };
 
+  const formatDateTime =  (dateTimeString) => {
+    const dateObject = new Date(dateTimeString);
+  
+    const options = {
+      year: 'numeric',
+      month: 'numeric',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+    };
+  
+    return dateObject.toLocaleString(undefined, options);
+  }
+
 
   return (
     <div className="p-3">
@@ -108,6 +119,8 @@ const ScheduleTable = () => {
                     }}
                   />
 
+                  
+
                 </div>
                 <table class="table table-striped mt-3">
                   <thead className="table-primary">
@@ -133,9 +146,9 @@ const ScheduleTable = () => {
             }).map((t) => (
               <tr key={t.id}>
                 <td>{t.start}</td>
-                <td>{t.startDateTime}</td>
+                <td>{formatDateTime(t.startDateTime)}</td>
                 <td>{t.destination}</td>
-                <td>{t.destinationDateTime}</td>
+                <td>{formatDateTime(t.destinationDateTime)}</td>
                 <td>
                   <Link
                     className="btn btn-warning"

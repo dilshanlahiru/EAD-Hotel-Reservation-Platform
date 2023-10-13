@@ -54,39 +54,9 @@ const TravelAgentHome = () => {
                 </div>
               </div>
 
-              <div class="col-md-3 mx-auto ">
-                <div style={{ height: 190 }} class="card text-center shadow-lg">
-                  <div class="card-block">
-                    <img
-                      style={{ height: 130, width: 130 }}
-                      class="card-img-top"
-                      src="https://cdn-icons-png.flaticon.com/512/476/476863.png"
-                      alt="Card image cap"
-                    />
-                    {/* <h4 class="card-title"></h4> */}
-                    <Link className="btn btn-primary" to={"/userTable"}>
-                      User Management
-                    </Link>
-                  </div>
-                </div>
-              </div>
+             
 
-              <div class="col-md-3 mx-auto ">
-                <div style={{ height: 190 }} class="card text-center shadow-lg">
-                  <div class="card-block">
-                    <img
-                      style={{ height: 130, width: 130 }}
-                      class="card-img-top"
-                      src="https://cdn-icons-png.flaticon.com/512/476/476863.png"
-                      alt="Card image cap"
-                    />
-                    {/* <h4 class="card-title"></h4> */}
-                    <Link className="btn btn-primary" to={"/trainTable"}>
-                      Train Management
-                    </Link>
-                  </div>
-                </div>
-              </div>
+             
             </div>
 
             <br></br>

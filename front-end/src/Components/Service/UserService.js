@@ -24,5 +24,8 @@ class UserService{
     updateStatus(userId, status){
         return axios.put(URL + '/' + userId + '/' + status)
     }
+    login(user){
+        return axios.post(URL + '/login', user);
+    }
 }
 export default new UserService();   

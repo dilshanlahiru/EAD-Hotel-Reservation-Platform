@@ -13,12 +13,19 @@ const ScheduleForm = () => {
   const [startDateTime, setStartDateTime] = useState("");
   const [destinationDateTime, setDestinationDateTime] = useState("");
   const [status, setStatus] = useState(0);
+  const [trainName, setTrainName] = useState("");
 
   const { trainId } = useParams();
   const { scheduleId } = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
+    if (trainId) {
+      TrainService.getTrainById(trainId).then((response) => {
+        setTrainName(response.trainName);
+        console.log(response);
+      });
+    }
     if (scheduleId) {
       ScheduleService.getSchduleById(scheduleId).then((response) => {
         setId(response.id)
@@ -34,7 +41,7 @@ const ScheduleForm = () => {
   const submitTrain = (e) => {
     e.preventDefault();
 
-    const train = {id, trainId, start, startDateTime, destination, destinationDateTime, status};
+    const train = {id, trainId, trainName, start, startDateTime, destination, destinationDateTime, status};
 
     if (scheduleId) {
       ScheduleService.updateSchedule(train).then((response) => {
@@ -104,7 +111,7 @@ console.log("d2", destinationDateTime)
                     style={{ marginLeft: -9 }}
                     className="col-sm-3 col-form-label"
                   >
-                    Start Date
+                    Start DateTime
                   </strong>
                   <input
                     name="dateTime"
@@ -148,7 +155,7 @@ console.log("d2", destinationDateTime)
                     style={{ marginLeft: -9 }}
                     className="col-sm-3 col-form-label"
                   >
-                    End Date
+                    End DateTime
                   </strong>
                   <input
                     name="date"

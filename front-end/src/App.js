@@ -14,6 +14,7 @@ import ScheduleTable from './Components/TrainManagement/ScheduleTable';
 import ScheduleForm from './Components/TrainManagement/ScheduleForm';
 import LoginForm from './Components/LoginForm';
 import NavBar from './Components/NavBar';
+import TravelAgentHome from './Components/TravelAgentHome';
 
 function App() {
   return (
@@ -23,8 +24,10 @@ function App() {
       </header>
       <main>
         <Routes>
-          <Route path='/' element={<Home/>}/>
-          <Route path='/login' element={<LoginForm/>}/>
+          <Route path='/backOfficeHome' element={<Home/>}/>
+          <Route path='/' element={<LoginForm/>}/>
+          <Route path='/travelAgenteHome' element={<TravelAgentHome/>}/>
+
           <Route path='/ticketBookingTable' element={<TicketBookingTable/>}/>
           <Route path='/ticketForm' element={<TicketForm/>}/>
 

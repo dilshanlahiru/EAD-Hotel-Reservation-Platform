@@ -174,8 +174,8 @@ const TraverlerTable = () => {
                     return value;
                   } else if (
                     //value.id.toString(includes(search))
-                    value.name.toLowerCase().includes(search.toLowerCase()) || value.email.toLowerCase().includes(search.toLowerCase()
-                      || value.nic.toLowerCase().includes(search.toLowerCase()))
+                    value.name.toLowerCase().includes(search.toLowerCase()) || value.email.toLowerCase().includes(search.toLowerCase())
+                      || value.nic.toLowerCase().includes(search.toLowerCase())
                   ) {
                     return value;
                   }
