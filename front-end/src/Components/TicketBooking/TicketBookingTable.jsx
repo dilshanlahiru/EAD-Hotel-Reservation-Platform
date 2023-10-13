@@ -1,6 +1,7 @@
-import React from "react";
-import { useState, useEffect } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useState } from "react";
+import { useNavigate, useParams, Link } from "react-router-dom";
+
 import Swal from "sweetalert2";
 import ResavationService from "../Service/ResavationService";
 
@@ -68,7 +69,7 @@ const TicketBookingTable = () => {
   return (
     <div className="p-3">
       <div className=" boxnotice card text-center p-3 mt-1">
-        <h1>All Schedules</h1>
+        <h1>All Resavations</h1>
 
         <div>
           <div className="container p-1 mt-4 mb-4">
@@ -133,9 +134,9 @@ const TicketBookingTable = () => {
                       <td>
                         <Link
                           className="btn btn-warning"
-                          to={`/AdminHome/NoticeTable/NoticeForm/${note.id}`}
+                          to={`/bookingDetails/${note.id}`}
                         >
-                          View Schedule &nbsp;
+                          View Details &nbsp;
                           <i class="fa fa-cog" aria-hidden="true"></i>
                         </Link>
                       </td>

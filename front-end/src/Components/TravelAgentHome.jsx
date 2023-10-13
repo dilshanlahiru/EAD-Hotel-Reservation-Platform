@@ -14,7 +14,7 @@ const TravelAgentHome = () => {
         <div class="py-5">
           <div class="container">
             <div class="row mx-auto ">
-              <div class="col-md-3 mx-auto">
+              {/* <div class="col-md-3 mx-auto">
                 <div style={{ height: 190 }} class="card text-center shadow-lg">
                   <div class="card-block">
                     <img
@@ -32,7 +32,7 @@ const TravelAgentHome = () => {
                     </Link>
                   </div>
                 </div>
-              </div>
+              </div> */}
 
               <div class="col-md-3 mx-auto">
                 <div style={{ height: 190 }} class="card text-center shadow-lg">

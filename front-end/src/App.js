@@ -15,6 +15,7 @@ import ScheduleForm from './Components/TrainManagement/ScheduleForm';
 import LoginForm from './Components/LoginForm';
 import NavBar from './Components/NavBar';
 import TravelAgentHome from './Components/TravelAgentHome';
+import ViewBookingDetails from './Components/TicketBooking/ViewBookingDetails';
 
 function App() {
   return (
@@ -29,7 +30,9 @@ function App() {
           <Route path='/travelAgenteHome' element={<TravelAgentHome/>}/>
 
           <Route path='/ticketBookingTable' element={<TicketBookingTable/>}/>
+          <Route path='/bookingDetails/:resId' element={<ViewBookingDetails/>}/>
           <Route path='/ticketForm' element={<TicketForm/>}/>
+          <Route path='/ticketForm/:resId' element={<TicketForm/>}/>
 
           <Route path='/trainTable' element={<TrainTable/>}/>
           <Route path='/trainForm' element={<TrainForm/>}/>

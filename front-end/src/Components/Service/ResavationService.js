@@ -15,7 +15,7 @@ class ReservationService{
     updateReservationService(resvation){
         return axios.put(URL, resvation);  
     }
-    getReservationServiceById(id){
+    getReservationById(id){
         return axios.get(URL + '/' + id).then((resopnse)=>resopnse.data)
     }
 }
