@@ -12,15 +12,19 @@ import UserReg from './Components/UserManagement/UserReg';
 import UserTable from './Components/UserManagement/UserTable';
 import ScheduleTable from './Components/TrainManagement/ScheduleTable';
 import ScheduleForm from './Components/TrainManagement/ScheduleForm';
+import LoginForm from './Components/LoginForm';
+import NavBar from './Components/NavBar';
 
 function App() {
   return (
     <div className="App">
       <header>
+        <NavBar></NavBar>
       </header>
       <main>
         <Routes>
           <Route path='/' element={<Home/>}/>
+          <Route path='/login' element={<LoginForm/>}/>
           <Route path='/ticketBookingTable' element={<TicketBookingTable/>}/>
           <Route path='/ticketForm' element={<TicketForm/>}/>
 

@@ -19,7 +19,7 @@ const TraverlerForm = () => {
   useEffect(() => {
     if (userId) {
       UserService.getUserById(userId).then((response) => {
-        setId(response.id)
+        setId(response.id);
         setName(response.name);
         setEmail(response.email);
         setNic(response.nic);
@@ -29,13 +29,10 @@ const TraverlerForm = () => {
     }
   }, []);
 
-  
-
-
   const submitUser = (e) => {
     e.preventDefault();
-    let role = parseInt(roleString)
-    const user = {id, name, email, password, nic, role, status};
+    let role = parseInt(roleString);
+    const user = { id, name, email, password, nic, role, status };
     console.log("u", user);
 
     if (userId) {
@@ -64,14 +61,8 @@ const TraverlerForm = () => {
         >
           <div class="card-body">
             <h2 class="card-title mt-1">Add User</h2>
-            <form
-               onSubmit={submitUser}
-            >
+            <form onSubmit={submitUser}>
               <div>
-                
-
-
-
                 {/* <div className="row w-50  mx-auto mt-3">
                   <strong
                     style={{ marginLeft: -9 }}
@@ -104,7 +95,7 @@ const TraverlerForm = () => {
                               <option value="SE3090-Softwre Architecture">SE3090-Softwre Architecture</option>
                       </select>
                 </div> */}
-                
+
                 <div className="row w-50  mx-auto mt-3">
                   <strong
                     style={{ marginLeft: -9 }}
@@ -207,7 +198,6 @@ const TraverlerForm = () => {
             </form>
           </div>
         </div>
-        
       </div>
     </div>
   );
