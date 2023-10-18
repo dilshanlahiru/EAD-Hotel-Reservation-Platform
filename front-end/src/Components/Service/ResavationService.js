@@ -12,7 +12,7 @@ class ReservationService{
     deleteResavation(id){
         return axios.delete(URL + '/' + id)
     }
-    updateReservationService(resvation){
+    updateReservation(resvation){
         return axios.put(URL, resvation);  
     }
     getReservationById(id){

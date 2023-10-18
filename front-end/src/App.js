@@ -16,6 +16,8 @@ import LoginForm from './Components/LoginForm';
 import NavBar from './Components/NavBar';
 import TravelAgentHome from './Components/TravelAgentHome';
 import ViewBookingDetails from './Components/TicketBooking/ViewBookingDetails';
+import ViewAllSchedules from './Components/TicketBooking/ViewAllSchedules';
+import UpdateReservation from './Components/TicketBooking/UpdateResavation';
 
 function App() {
   return (
@@ -31,8 +33,9 @@ function App() {
 
           <Route path='/ticketBookingTable' element={<TicketBookingTable/>}/>
           <Route path='/bookingDetails/:resId' element={<ViewBookingDetails/>}/>
-          <Route path='/ticketForm' element={<TicketForm/>}/>
-          <Route path='/ticketForm/:resId' element={<TicketForm/>}/>
+          <Route path='/ticketForm/:scheduleId' element={<TicketForm/>}/>               {/* create */}
+          <Route path='/updateResavation/:resId' element={<UpdateReservation/>}/>       {/* update */}
+          <Route path='/allSchedules' element={<ViewAllSchedules/>}/>
 
           <Route path='/trainTable' element={<TrainTable/>}/>
           <Route path='/trainForm' element={<TrainForm/>}/>

@@ -18,53 +18,20 @@ const TicketBookingTable = () => {
     });
   }, []);
 
-  // const deleteTrain = (trainId) => {
+  const formatDateTime =  (dateTimeString) => {
+    const dateObject = new Date(dateTimeString);
+  
+    const options = {
+      year: 'numeric',
+      month: 'numeric',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+    };
+  
+    return dateObject.toLocaleString(undefined, options);
+  }
 
-  //   const swalWithBootstrapButtons = Swal.mixin({
-  //     customClass: {
-  //       confirmButton: 'btn btn-success', 
-  //       cancelButton: 'btn btn-danger'
-  //     },
-  //     buttonsStyling: false
-  //   })
-    
-  //   swalWithBootstrapButtons.fire({
-  //     title: 'Are you sure?',
-  //     text: "You won't be able to revert this!",
-  //     icon: 'warning',
-  //     showCancelButton: true,
-  //     confirmButtonText: 'Yes, delete it!',
-  //     cancelButtonText: 'No, cancel!',
-  //     reverseButtons: true
-  //   }).then((result) => {
-
-  //     if (result.isConfirmed) {
-  //       TrainService.deleteTrain(trainId)
-  //       .then((res) => {      
-  //         setTrainList(trainList.filter((trainList) => trainList.id !== trainId));
-  //       })
-  //       .catch((error) => {
-  //         console.log(error);
-  //       });
-
-  //       swalWithBootstrapButtons.fire(
-  //         'Deleted!',
-  //         'Your file has been deleted.',
-  //         'success'
-  //       )
-  //     } else if (
-  //       /* Read more about handling dismissals below */
-  //       result.dismiss === Swal.DismissReason.cancel
-  //     ) {
-  //       swalWithBootstrapButtons.fire(
-  //         'Cancelled',
-  //         'Delete canceled',
-  //         'error'
-  //       )
-  //     }
-  //   })
-
-  // };
 
   return (
     <div className="p-3">
@@ -79,7 +46,7 @@ const TicketBookingTable = () => {
                   <Link
                     className="btn btn-primary mt-3 p-2"
                     style={{ width: 190 }}
-                    to={"/ticketForm"}
+                    to={"/allSchedules"}
                   >
                     Add Booking &nbsp;
                     <i class="fa fa-plus-circle" aria-hidden="true"></i>
@@ -121,7 +88,7 @@ const TicketBookingTable = () => {
             return value;
           } else if (
             //value.id.toString(includes(search))
-            value.travelerNIC.toLowerCase().includes(search.toLowerCase()) 
+            value.travelerNIC.toLowerCase().includes(search.toLowerCase()) || value.bookingDateTime.toLowerCase().includes(search.toLowerCase())
           ) {
             return value;
           }
@@ -129,7 +96,7 @@ const TicketBookingTable = () => {
 }).map((note) => (
                     <tr key={note.id}>
                       <td>{note.travelerNIC}</td>
-                      <td>{note.bookingDateTime}</td>
+                      <td>{formatDateTime(note.bookingDateTime)}</td>
                       <td>{note.seats}</td>
                       <td>
                         <Link
@@ -141,16 +108,7 @@ const TicketBookingTable = () => {
                         </Link>
                       </td>
                       
-                      {/* <td>
-                        <button
-                          type="button"
-                          onClick={() => deleteNotice(note._id)}
-                          class="btn btn-danger"
-                        > Delete &nbsp;
-                          <i class="fa fa-trash" aria-hidden="true"></i> 
-                          
-                        </button>
-                      </td>  */}
+                     
                     </tr>
                   ))}
                 </tbody>

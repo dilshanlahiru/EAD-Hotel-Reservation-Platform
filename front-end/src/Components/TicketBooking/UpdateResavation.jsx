@@ -5,7 +5,7 @@ import ScheduleService from "../Service/ScheduleService";
 import ResavationService from "../Service/ResavationService";
 import Swal from "sweetalert2";
 
-const TicketForm = () => {
+const UpdateReservation = () => {
   const [id, setId] = useState("");
   const [start, setStart] = useState("");
   const [destination, setDestination] = useState("");
@@ -17,24 +17,12 @@ const TicketForm = () => {
   const [seats, setSeats] = useState(0);
 
   const [bookingDateTime, setBookingDateTime] = useState("");
-  const [rscheduleId, setRScheduleId] = useState("");
+  const [scheduleId, setScheduleId] = useState("");
 
-  const { scheduleId } = useParams();
   const { resId } = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (scheduleId) {
-      ScheduleService.getSchduleById(scheduleId).then((response) => {
-        setStart(response.start);
-        setStartDateTime(response.startDateTime);
-        setDestination(response.destination);
-        setDestinationDateTime(response.destinationDateTime);
-        setTrainName(response.trainName);
-        console.log(response);
-      });
-    }
-
     if (resId) {
       ResavationService.getReservationById(resId).then((response) => {
         setId(response.id)
@@ -46,7 +34,7 @@ const TicketForm = () => {
         setDestination(response.schedule.destination);
         setDestinationDateTime(response.schedule.destinationDateTime);
         setTrainName(response.schedule.trainName)
-        setRScheduleId(response.scheduleId)
+        setScheduleId(response.scheduleId)
         console.log(response);
       });
     }
@@ -61,23 +49,13 @@ const TicketForm = () => {
    
 
     if (resId) {
-      const booking = {id, scheduleId : rscheduleId, travelerNIC, status, seats};
+      const booking = {id, scheduleId, travelerNIC, status, seats};
 
       ResavationService.updateReservation(booking).then((response) => {
         Swal.fire("Success", "Updated Successfully", "success");
         navigate("/ticketBookingTable");
       });
-    } else if(scheduleId) {
-      const booking = {id, scheduleId, travelerNIC, status, seats};
-      ResavationService.createResavation(booking)
-        .then((response) => {
-          Swal.fire("Success", "Added Successfully", "success");
-          navigate("/ticketBookingTable");
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
+    } 
   };
   
 
@@ -169,4 +147,4 @@ const TicketForm = () => {
   );
 };
 
-export default TicketForm;
+export default UpdateReservation;

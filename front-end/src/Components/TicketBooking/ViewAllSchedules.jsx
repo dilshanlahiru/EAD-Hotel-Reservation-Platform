@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 import ScheduleService from "../Service/ScheduleService";
 
 
-const ScheduleTable = () => {
+const ViewAllSchedules = () => {
   const [search, setSearch] = useState("");
   const [scheduleList, setScheduleList] = useState([]);
   const [trainName, setTrainName] = useState("");
@@ -15,17 +15,10 @@ const ScheduleTable = () => {
   const { trainId } = useParams();
 
   useEffect(() => {
-    if(trainId){
-      TrainService.getTrainById(trainId).then((response) => {
-        setTrainName(response.trainName)
-        console.log(response);
-      });
-      ScheduleService.getSchduleByTrainId(trainId).then((data) => {
+      ScheduleService.getAllSchedules().then((data) => {
         setScheduleList(data);
         console.log(data);
       });
-    }
-    
   }, []);
 
   const deleteSchedule = (scheduleId) => {
@@ -94,26 +87,26 @@ const ScheduleTable = () => {
   return (
     <div className="p-3">
       <div className=" boxnotice card text-center p-3 mt-1">
-        <h1> {trainName} Train Schedule</h1>
+        <h1> Train Schedules</h1>
 
         <div>
           <div className="container p-1 mt-4 mb-4">
             <div className="row ">
               <div className="shadow-lg card mx-auto w-100">
                 <div className=" container d-flex flex-row">
-                  <Link
-                    className="btn btn-primary mt-3 p-2"
-                    style={{ width: 190 }}
-                    to={`/scheduleForm/${trainId}`}
-                  >
-                    Add Schedule &nbsp;
-                    <i class="fa fa-plus-circle" aria-hidden="true"></i>
-                  </Link>
-
                   <input
                     type="text"
                     placeholder="Search By Train Name"
                     className="form-control mt-3 admin-srchbr1"
+                    onChange={(e) => {
+                      setSearch(e.target.value);
+                    }}
+                  />
+
+                    <input
+                    type="date"
+                    placeholder="Search By Notice"
+                    className="form-control mt-3 admin-srchbr-date "
                     onChange={(e) => {
                       setSearch(e.target.value);
                     }}
@@ -138,7 +131,8 @@ const ScheduleTable = () => {
                 return value;
               } else if (
                 //value.id.toString(includes(search))
-                value.start.toLowerCase().includes(search.toLowerCase()) || value.destination.toLowerCase().includes(search.toLowerCase()) ) 
+                value.start.toLowerCase().includes(search.toLowerCase()) || value.destination.toLowerCase().includes(search.toLowerCase()) ||
+                value.startDateTime.toLowerCase().includes(search.toLowerCase()) || value.destinationDateTime.toLowerCase().includes(search.toLowerCase())) 
                 {
                   return value;
                 }
@@ -152,20 +146,20 @@ const ScheduleTable = () => {
                 <td>
                   <Link
                     className="btn btn-warning"
-                    to={`/scheduleForm/${trainId}/${t.id}`}
+                    to={`/ticketForm/${t.id}`}
                   >
-                    Update &nbsp;
+                    Book &nbsp;
                     <i class="fa fa-cog" aria-hidden="true"></i>
                   </Link>
                 
-                  <button
+                  {/* <button
                     type="button"
                     onClick={() => deleteSchedule(t.id)}
                     class="btn btn-danger"
                   > Delete &nbsp;
                     <i class="fa fa-trash" aria-hidden="true"></i> 
                     
-                  </button>
+                  </button> */}
                 
                 </td>  
               </tr>
@@ -182,4 +176,4 @@ const ScheduleTable = () => {
   );
 };
 
-export default ScheduleTable;
+export default ViewAllSchedules;

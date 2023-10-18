@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import UserService from "../Service/UserService";
 
-const UserReg = () => {
+const RegisterNewUser = () => {
   const [id, setId] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -201,4 +201,4 @@ const UserReg = () => {
   );
 };
 
-export default UserReg;
+export default RegisterNewUser;

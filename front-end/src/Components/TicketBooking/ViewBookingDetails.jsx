@@ -176,7 +176,7 @@ const ViewBookingDetails = () => {
         </div> */}
          <Link
                     className="btn btn-primary"
-                    to={`/ticketForm/${id}`}
+                    to={`/updateResavation/${id}`}  
                   >
                     update &nbsp;
                     <i class="fa fa-cog" aria-hidden="true"></i>
