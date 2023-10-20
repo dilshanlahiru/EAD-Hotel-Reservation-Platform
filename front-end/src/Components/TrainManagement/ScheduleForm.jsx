@@ -98,18 +98,18 @@ const ScheduleForm = () => {
             <form onSubmit={submitTrain}>
               <div>
                 <h1 className="mt-3">Add Train schedule</h1>
-                <div className="row w-50  mx-auto mt-4 ">
+                <div className="row col-sm-8 border mx-auto mt-4 ">
                   <strong
                     style={{ marginLeft: -9 }}
                     className="col-sm-3  col-form-label"
                   >
-                    Start
+                    From
                   </strong>
                   <input
                     name="trainName"
                     style={{ marginLeft: 9 }}
                     className="form-control w-75"
-                    placeholder="Add Name..."
+                    placeholder="From..."
                     type="text"
                     value={start}
                     minLength="1"
@@ -123,7 +123,7 @@ const ScheduleForm = () => {
                 <div className="row col-sm-8 border mx-auto mt-3">
                   <strong
                     style={{ marginLeft: -9 }}
-                    className="col-sm-3 border col-form-label "
+                    className="col-sm-3  col-form-label"
                   >
                     Departure
                   </strong>
@@ -141,19 +141,19 @@ const ScheduleForm = () => {
                   />
                 </div>
 
-                <div className="row w-50  mx-auto mt-3">
+                <div className="row col-sm-8 mx-auto mt-3">
                   <strong
                     style={{ marginLeft: -3 }}
                     className="col-sm-3  col-form-label"
                   >
-                    End
+                    To
                   </strong>
 
                   <input
                     name="note"
                     style={{ marginLeft: 3 }}
                     className="form-control w-75"
-                    placeholder="Add notice...."
+                    placeholder="To...."
                     type="text"
                     value={destination}
                     minLength="5"
@@ -164,7 +164,7 @@ const ScheduleForm = () => {
                   />
                 </div>
 
-                <div className="row w-50  mx-auto mt-3">
+                <div className="row col-sm-8 mx-auto mt-3">
                   <strong
                     style={{ marginLeft: -9 }}
                     className="col-sm-3 col-form-label"

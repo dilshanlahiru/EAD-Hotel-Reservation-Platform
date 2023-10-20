@@ -80,12 +80,12 @@ const TrainTable = () => {
         <h1>Train Sceduals</h1>
       </div>
 
-      <div className="p-3">
-        <div className=" boxnotice  text-center p-3 mt-1">
+      <div className="container-fluid">
+        <div className="w-75 mx-auto text-center p-3 mt-1">
           <div>
             <div className="container p-1 mt-4 mb-4">
               <div className="row ">
-                <div className="shadow-lg card mx-auto w-100">
+                <div className="shadow-lg card border-bottom border-primary mx-auto w-100">
                   <div className=" container d-flex flex-row">
                     <input
                       type="text"
@@ -132,7 +132,7 @@ const TrainTable = () => {
                           <tr key={t.id}>
                             <td>{t.trainName}</td>
                             <td>{t.note}</td>
-                            <td className="d-flex justify-content-around">
+                            <td className="d-flex justify-content-sm-around">
                               <Link
                                 className="btn btn-primary"
                                 to={`/scheduleTable/${t.id}`}

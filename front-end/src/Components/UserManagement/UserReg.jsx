@@ -63,16 +63,19 @@ const UserReg = () => {
           className="img-fluid w-100"
         />
       </div>
-      <div className="centered-text">
-        <h1>User Registration Tab</h1>
-      </div>
+      <div className="centered-text"></div>
       <div className="row">
         <div
-          class="card  text-bg-white adminNotice-table mb-3 mt-5 text-center mx-auto shadow-lg"
-          style={{ maxWidth: 900, marginLeft: 180, borderRadius: 30 }}
+          class="card  text-bg-white adminNotice-table mb-3 text-center mx-auto shadow-lg"
+          style={{
+            maxWidth: 900,
+            marginLeft: 180,
+            borderRadius: 30,
+            marginTop: -150,
+          }}
         >
           <div class="card-body">
-            {/* <h2 class="card-title mt-1">Add User</h2> */}
+            <h2 class="card-title mt-1">Add User</h2>
             <form onSubmit={submitUser}>
               <div>
                 <div className="row w-50  mx-auto mt-3">
