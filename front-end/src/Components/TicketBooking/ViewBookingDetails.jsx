@@ -119,93 +119,138 @@ const ViewBookingDetails = () => {
             <h2 class="card-title mt-1">Booking Details</h2>
 
             <div>
-              <div className="col-sm-8 row border  mx-auto mt-3">
+              <div className="col-sm-8 row  mx-auto mt-3">
                 <strong
                   style={{ marginLeft: -9 }}
-                  className="col-sm-3 border col-form-label"
+                  className="col-sm-3 col-form-label"
                 >
                   Traveler's NIC :
                 </strong>
                 <div
                   style={{ marginLeft: -9 }}
-                  className="col-sm-3 border  col-form-label"
+                  className="col-sm-3  col-form-label"
                 >
                   {travelerNIC}
                 </div>
               </div>
 
-              <div className="col-sm-8 row border  mx-auto mt-3">
+              <div className="col-sm-8 row  mx-auto mt-3">
                 <strong
                   style={{ marginLeft: -9 }}
-                  className="col-sm-5 border col-form-label"
+                  className="col-sm-5 col-form-label"
                 >
                   Booking Date and Time :
                 </strong>
                 <div
                   style={{ marginLeft: -9 }}
-                  className="col-sm-5 border  col-form-label"
+                  className="col-sm-5  col-form-label"
                 >
                   {bookingDateTime}
                 </div>
               </div>
 
-              <div className="col-sm-8 row border  mx-auto mt-3">
+              <div className="col-sm-8 row  mx-auto mt-3">
                 <strong
                   style={{ marginLeft: -9 }}
-                  className="col-sm-5 border col-form-label"
+                  className="col-sm-5 col-form-label"
                 >
                   Seats :
                 </strong>
                 <div
                   style={{ marginLeft: -9 }}
-                  className="col-sm-5 border  col-form-label"
+                  className="col-sm-5  col-form-label"
                 >
                   {seats}
                 </div>
               </div>
 
-              <div className="col-sm-8 row border  mx-auto mt-3">
+              <div className="col-sm-8 row  mx-auto mt-3">
                 <strong
                   style={{ marginLeft: -9 }}
-                  className="col-sm-5 border col-form-label"
+                  className="col-sm-5 col-form-label"
                 >
                   Start :
                 </strong>
                 <div
                   style={{ marginLeft: -9 }}
-                  className="col-sm-5 border  col-form-label"
+                  className="col-sm-5  col-form-label"
                 >
                   {start}
                 </div>
               </div>
 
-              <div className="col-sm-8 row border  mx-auto mt-3">
+              <div className="col-sm-8 row  mx-auto mt-3">
                 <strong
                   style={{ marginLeft: -9 }}
-                  className="col-sm-5 border col-form-label"
+                  className="col-sm-5 col-form-label"
+                >
+                  Start Date and Time :
+                </strong>
+                <div
+                  style={{ marginLeft: -9 }}
+                  className="col-sm-5  col-form-label"
+                >
+                  {startDateTime}
+                </div>
+              </div>
+
+              <div className="col-sm-8 row  mx-auto mt-3">
+                <strong
+                  style={{ marginLeft: -9 }}
+                  className="col-sm-5 col-form-label"
                 >
                   Destination :
                 </strong>
                 <div
                   style={{ marginLeft: -9 }}
-                  className="col-sm-5 border  col-form-label"
+                  className="col-sm-5  col-form-label"
                 >
                   {destination}
                 </div>
               </div>
 
-              <div className="col-sm-8 row border  mx-auto mt-3">
+              <div className="col-sm-8 row  mx-auto mt-3">
                 <strong
                   style={{ marginLeft: -9 }}
-                  className="col-sm-5 border col-form-label"
+                  className="col-sm-5 col-form-label"
                 >
-                  Destination :
+                  Arrival Date and Time :
                 </strong>
                 <div
                   style={{ marginLeft: -9 }}
-                  className="col-sm-5 border  col-form-label"
+                  className="col-sm-5  col-form-label"
                 >
-                  {destination}
+                  {destinationDateTime}
+                </div>
+              </div>
+
+              <div className="col-sm-8 row  mx-auto mt-3">
+                <strong
+                  style={{ marginLeft: -9 }}
+                  className="col-sm-5 col-form-label"
+                >
+                  Status :
+                </strong>
+                <div
+                  style={{ marginLeft: -9 }}
+                  className="col-sm-5  col-form-label"
+                >
+                  {status}
+                </div>
+              </div>
+
+              <div className="col-sm-8 row  mx-auto mt-3">
+                <strong
+                  style={{ marginLeft: -9 }}
+                  className="col-sm-5 col-form-label"
+                >
+                  Train Name :
+                </strong>{" "}
+                <div
+                  style={{ marginLeft: -9 }}
+                  className="col-sm-5  col-form-label"
+                >
+                  {trainName}
                 </div>
               </div>
 
@@ -213,11 +258,19 @@ const ViewBookingDetails = () => {
                 className="row w-50 mx-auto mt-3 mb-4 "
                 style={{ borderRadius: 30 }}
               >
-                <input
-                  className="btn btn-primary mt-4 mx-auto shadow-lg"
-                  type="submit"
-                  value="Save"
-                />
+                <Link
+                  className="btn btn-primary"
+                  to={`/updateResavation/${id}`}
+                >
+                  update
+                </Link>
+                <button
+                  type="button"
+                  onClick={() => deleteResavation(id)}
+                  class="btn btn-danger mt-3"
+                >
+                  Delete
+                </button>
               </div>
             </div>
           </div>
@@ -237,19 +290,19 @@ const ViewBookingDetails = () => {
     //     {status}
     //     {trainName}
 
-    //     <Link className="btn btn-primary" to={`/updateResavation/${id}`}>
-    //       update &nbsp;
-    //       <i class="fa fa-cog" aria-hidden="true"></i>
-    //     </Link>
-    //     <button
-    //       type="button"
-    //       onClick={() => deleteResavation(id)}
-    //       class="btn btn-danger"
-    //     >
-    //       {" "}
-    //       Delete &nbsp;
-    //       <i class="fa fa-trash" aria-hidden="true"></i>
-    //     </button>
+    // <Link className="btn btn-primary" to={`/updateResavation/${id}`}>
+    //   update &nbsp;
+    //   <i class="fa fa-cog" aria-hidden="true"></i>
+    // </Link>
+    // <button
+    //   type="button"
+    //   onClick={() => deleteResavation(id)}
+    //   class="btn btn-danger"
+    // >
+    //   {" "}
+    //   Delete &nbsp;
+    //   <i class="fa fa-trash" aria-hidden="true"></i>
+    // </button>
     //   </div>
     // </div>
   );
