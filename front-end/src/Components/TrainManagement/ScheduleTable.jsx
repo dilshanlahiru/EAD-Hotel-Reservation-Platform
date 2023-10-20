@@ -167,8 +167,7 @@ const ScheduleTable = () => {
                                 className="btn btn-warning"
                                 to={`/scheduleForm/${trainId}/${t.id}`}
                               >
-                                Update &nbsp;
-                                <i class="fa fa-cog" aria-hidden="true"></i>
+                                Update
                               </Link>
 
                               <button
@@ -178,8 +177,7 @@ const ScheduleTable = () => {
                                 class="btn btn-danger"
                               >
                                 {" "}
-                                Delete &nbsp;
-                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                Delete
                               </button>
                             </td>
                           </tr>

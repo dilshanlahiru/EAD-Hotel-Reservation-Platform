@@ -5,7 +5,6 @@ import Swal from "sweetalert2";
 import ScheduleService from "../Service/ScheduleService";
 import ResavationService from "../Service/ResavationService";
 
-
 const ViewBookingDetails = () => {
   const [id, setId] = useState("");
   const [travelerNIC, setTravelerNIC] = useState("");
@@ -25,20 +24,19 @@ const ViewBookingDetails = () => {
   useEffect(() => {
     if (resId) {
       ResavationService.getReservationById(resId).then((response) => {
-        setId(response.id)
-        setTravelerNIC(response.travelerNIC)
-        setBookingDateTime(response.bookingDateTime)
-        setSeats(response.seats)
+        setId(response.id);
+        setTravelerNIC(response.travelerNIC);
+        setBookingDateTime(response.bookingDateTime);
+        setSeats(response.seats);
         setStart(response.schedule.start);
         setStartDateTime(response.schedule.startDateTime);
         setDestination(response.schedule.destination);
         setDestinationDateTime(response.schedule.destinationDateTime);
-        setTrainName(response.schedule.trainName)
+        setTrainName(response.schedule.trainName);
         console.log(response);
       });
     }
   }, []);
-
 
   console.log(id);
   console.log(travelerNIC);
@@ -50,150 +48,210 @@ const ViewBookingDetails = () => {
   console.log(destinationDateTime);
   console.log(status);
   console.log(trainName);
-  
 
   const deleteResavation = (revationId) => {
-
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
-        confirmButton: 'btn btn-success', 
-        cancelButton: 'btn btn-danger'
+        confirmButton: "btn btn-success",
+        cancelButton: "btn btn-danger",
       },
-      buttonsStyling: false
-    })
-    
-    swalWithBootstrapButtons.fire({
-      title: 'Are you sure?',
-      text: "You won't be able to revert this!",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Yes, delete it!',
-      cancelButtonText: 'No, cancel!',
-      reverseButtons: true
-    }).then((result) => {
+      buttonsStyling: false,
+    });
 
-      if (result.isConfirmed) {
-        ResavationService.deleteResavation(revationId)
-        .then((res) => {      
-          navigate("ticketBookingTable");
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+    swalWithBootstrapButtons
+      .fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "No, cancel!",
+        reverseButtons: true,
+      })
+      .then((result) => {
+        if (result.isConfirmed) {
+          ResavationService.deleteResavation(revationId)
+            .then((res) => {
+              navigate("ticketBookingTable");
+            })
+            .catch((error) => {
+              console.log(error);
+            });
 
-        swalWithBootstrapButtons.fire(
-          'Deleted!',
-          'Your file has been deleted.',
-          'success'
-        )
-      } else if (
-        /* Read more about handling dismissals below */
-        result.dismiss === Swal.DismissReason.cancel
-      ) {
-        swalWithBootstrapButtons.fire(
-          'Cancelled',
-          'Delete canceled',
-          'error'
-        )
-      }
-    })
-
+          swalWithBootstrapButtons.fire(
+            "Deleted!",
+            "Your file has been deleted.",
+            "success"
+          );
+        } else if (
+          /* Read more about handling dismissals below */
+          result.dismiss === Swal.DismissReason.cancel
+        ) {
+          swalWithBootstrapButtons.fire(
+            "Cancelled",
+            "Delete canceled",
+            "error"
+          );
+        }
+      });
   };
 
-
   return (
-    <div className="p-3">
-      <div className=" boxnotice card text-center p-3 mt-1">
-        <h1>Booking Details</h1>
+    <div>
+      <div>
+        <img
+          style={{ height: "300px" }}
+          src="https://www.atpi.com/media/cache/picture/35a05bdfc8e6aa40d1c9798e355cefdb.webp"
+          alt="Hero Image"
+          className="img-fluid w-100"
+        />
+      </div>
+      <div className="row">
+        <div
+          class="card text-bg-white adminNotice-table mb-3 mx-auto text-center shadow-lg"
+          style={{
+            maxWidth: 900,
+            borderRadius: 30,
+            marginTop: -185,
+          }}
+        >
+          <div class="card-body">
+            <h2 class="card-title mt-1">Booking Details</h2>
 
-        {/* <div>
-          <div className="container p-1 mt-4 mb-4">
-            <div className="row ">
-              <div className="shadow-lg card mx-auto w-100">
-                <div className=" container d-flex flex-row">
-                  
-
-            
+            <div>
+              <div className="col-sm-8 row border  mx-auto mt-3">
+                <strong
+                  style={{ marginLeft: -9 }}
+                  className="col-sm-3 border col-form-label"
+                >
+                  Traveler's NIC :
+                </strong>
+                <div
+                  style={{ marginLeft: -9 }}
+                  className="col-sm-3 border  col-form-label"
+                >
+                  {travelerNIC}
                 </div>
-                <table class="table table-striped mt-3">
-                  <thead className="table-primary">
-                    <tr>
-                      <th scope="col">Train Name</th>
-                      <th scope="col">Note</th>
-                      <th scope="col">Actions</th>  
-                    </tr>
-                  </thead>
-                  <tbody>
-            {trainList?.filter((value) => {
-              if (search === "") {
-                return value;
-              } else if (
-                //value.id.toString(includes(search))
-                value.trainName.toLowerCase().includes(search.toLowerCase()) ) 
-                {
-                  return value;
-                }
-              return 0;
-            }).map((t) => (
-              <tr key={t.id}>
-                <td>{t.trainName}</td>
-                <td>{t.note}</td>
-                <td>
-                  <Link
-                    className="btn btn-primary"
-                    to={`/scheduleTable/${t.id}`}
-                  >
-                    Schedules &nbsp;
-                    <i class="fa fa-cog" aria-hidden="true"></i>
-                  </Link>
-                
-                  <Link
-                    className="btn btn-warning"
-                    to={`/trainForm/${t.id}`}
-                  >
-                    Update &nbsp;
-                    <i class="fa fa-cog" aria-hidden="true"></i>
-                  </Link>
-                
-                  <button
-                    type="button"
-                    onClick={() => deleteTrain(t.id)}
-                    class="btn btn-danger"
-                  > Delete &nbsp;
-                    <i class="fa fa-trash" aria-hidden="true"></i> 
-                    
-                  </button>
-                
-                </td>  
-              </tr>
-            ))}
-          </tbody>
-                </table>
-                <br></br>
+              </div>
+
+              <div className="col-sm-8 row border  mx-auto mt-3">
+                <strong
+                  style={{ marginLeft: -9 }}
+                  className="col-sm-5 border col-form-label"
+                >
+                  Booking Date and Time :
+                </strong>
+                <div
+                  style={{ marginLeft: -9 }}
+                  className="col-sm-5 border  col-form-label"
+                >
+                  {bookingDateTime}
+                </div>
+              </div>
+
+              <div className="col-sm-8 row border  mx-auto mt-3">
+                <strong
+                  style={{ marginLeft: -9 }}
+                  className="col-sm-5 border col-form-label"
+                >
+                  Seats :
+                </strong>
+                <div
+                  style={{ marginLeft: -9 }}
+                  className="col-sm-5 border  col-form-label"
+                >
+                  {seats}
+                </div>
+              </div>
+
+              <div className="col-sm-8 row border  mx-auto mt-3">
+                <strong
+                  style={{ marginLeft: -9 }}
+                  className="col-sm-5 border col-form-label"
+                >
+                  Start :
+                </strong>
+                <div
+                  style={{ marginLeft: -9 }}
+                  className="col-sm-5 border  col-form-label"
+                >
+                  {start}
+                </div>
+              </div>
+
+              <div className="col-sm-8 row border  mx-auto mt-3">
+                <strong
+                  style={{ marginLeft: -9 }}
+                  className="col-sm-5 border col-form-label"
+                >
+                  Destination :
+                </strong>
+                <div
+                  style={{ marginLeft: -9 }}
+                  className="col-sm-5 border  col-form-label"
+                >
+                  {destination}
+                </div>
+              </div>
+
+              <div className="col-sm-8 row border  mx-auto mt-3">
+                <strong
+                  style={{ marginLeft: -9 }}
+                  className="col-sm-5 border col-form-label"
+                >
+                  Destination :
+                </strong>
+                <div
+                  style={{ marginLeft: -9 }}
+                  className="col-sm-5 border  col-form-label"
+                >
+                  {destination}
+                </div>
+              </div>
+
+              <div
+                className="row w-50 mx-auto mt-3 mb-4 "
+                style={{ borderRadius: 30 }}
+              >
+                <input
+                  className="btn btn-primary mt-4 mx-auto shadow-lg"
+                  type="submit"
+                  value="Save"
+                />
               </div>
             </div>
           </div>
-        </div> */}
-         <Link
-                    className="btn btn-primary"
-                    to={`/updateResavation/${id}`}  
-                  >
-                    update &nbsp;
-                    <i class="fa fa-cog" aria-hidden="true"></i>
-                  </Link>
-          <button
-                    type="button"
-                    onClick={() => deleteResavation(id)}
-                    class="btn btn-danger"
-                  > Delete &nbsp;
-                    <i class="fa fa-trash" aria-hidden="true"></i> 
-                    
-          </button>
-
-          
-
+        </div>
       </div>
     </div>
+    // <div className="p-3">
+    //   <div className=" boxnotice card text-center p-3 mt-1">
+    //     <h1>Booking Details</h1>
+    //     {travelerNIC}
+    //     {bookingDateTime}
+    //     {seats}
+    //     {start}
+    //     {destination}
+    //     {startDateTime}
+    //     {destinationDateTime}
+    //     {status}
+    //     {trainName}
+
+    //     <Link className="btn btn-primary" to={`/updateResavation/${id}`}>
+    //       update &nbsp;
+    //       <i class="fa fa-cog" aria-hidden="true"></i>
+    //     </Link>
+    //     <button
+    //       type="button"
+    //       onClick={() => deleteResavation(id)}
+    //       class="btn btn-danger"
+    //     >
+    //       {" "}
+    //       Delete &nbsp;
+    //       <i class="fa fa-trash" aria-hidden="true"></i>
+    //     </button>
+    //   </div>
+    // </div>
   );
 };
 

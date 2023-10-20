@@ -25,108 +25,188 @@ const UpdateReservation = () => {
   useEffect(() => {
     if (resId) {
       ResavationService.getReservationById(resId).then((response) => {
-        setId(response.id)
-        setTravelerNIC(response.travelerNIC)
-        setBookingDateTime(response.bookingDateTime)
-        setSeats(response.seats)
+        setId(response.id);
+        setTravelerNIC(response.travelerNIC);
+        setBookingDateTime(response.bookingDateTime);
+        setSeats(response.seats);
         setStart(response.schedule.start);
         setStartDateTime(response.schedule.startDateTime);
         setDestination(response.schedule.destination);
         setDestinationDateTime(response.schedule.destinationDateTime);
-        setTrainName(response.schedule.trainName)
-        setScheduleId(response.scheduleId)
+        setTrainName(response.schedule.trainName);
+        setScheduleId(response.scheduleId);
         console.log(response);
       });
     }
   }, []);
 
-  console.log("scheduleId",scheduleId);
+  console.log("scheduleId", scheduleId);
   console.log("resId", resId);
 
   const submitBooking = (e) => {
     e.preventDefault();
 
-   
-
     if (resId) {
-      const booking = {id, scheduleId, travelerNIC, status, seats};
+      const booking = { id, scheduleId, travelerNIC, status, seats };
 
       ResavationService.updateReservation(booking).then((response) => {
         Swal.fire("Success", "Updated Successfully", "success");
         navigate("/ticketBookingTable");
       });
-    } 
+    }
   };
-  
 
   return (
     <div>
+      <div>
+        <img
+          style={{ height: "300px" }}
+          src="https://www.atpi.com/media/cache/picture/35a05bdfc8e6aa40d1c9798e355cefdb.webp"
+          alt="Hero Image"
+          className="img-fluid w-100"
+        />
+      </div>
       <div className="row">
         <div
-          class="card  text-bg-white adminNotice-table mb-3 mt-5 text-center"
-          style={{ maxWidth: 900, marginLeft: 180, borderRadius: 30 }}
+          class="card text-bg-white adminNotice-table mb-3 mx-auto text-center shadow-lg"
+          style={{
+            maxWidth: 900,
+            borderRadius: 30,
+            marginTop: -185,
+          }}
         >
           <div class="card-body">
             <h2 class="card-title mt-1">Booking</h2>
-            <form
-               onSubmit={submitBooking}
-            >
+            <form onSubmit={submitBooking}>
               <div>
-                  train name = {trainName}
-                  start = {start}
-                  start dateTime = {startDateTime}
-                  end  = {destination}
-                  end date = {destinationDateTime}
-
-
-                
-                
-                <div className="row w-50  mx-auto mt-3">
+                <div className="row w-75  mx-auto mt-3">
                   <strong
                     style={{ marginLeft: -9 }}
-                    className="col-sm-3  col-form-label"
+                    className="col-sm-4  col-form-label"
+                  >
+                    Train
+                  </strong>
+                  <input
+                    name="topic"
+                    style={{ marginLeft: 9 }}
+                    className="form-control w-50"
+                    placeholder="Add Topic..."
+                    type="text"
+                    disabled="true"
+                    value={trainName}
+                    minLength="5"
+                    onChange={(e) => {
+                      setTravelerNIC(e.target.value);
+                    }}
+                    required
+                  />
+                </div>
+                <div className="row w-75  mx-auto mt-3">
+                  <strong
+                    style={{ marginLeft: -9 }}
+                    className="col-sm-4 col-form-label"
+                  >
+                    Start
+                  </strong>
+                  <input
+                    name="topic"
+                    style={{ marginLeft: 9 }}
+                    className="form-control w-50"
+                    placeholder="Add Topic..."
+                    type="text"
+                    disabled="true"
+                    value={start}
+                    minLength="5"
+                    onChange={(e) => {
+                      setTravelerNIC(e.target.value);
+                    }}
+                    required
+                  />
+                </div>
+                <div className="row w-75 mx-auto mt-3">
+                  <strong className="col-sm-4 col-form-label">
+                    Start Date
+                  </strong>
+                  <input
+                    name="topic"
+                    className="form-control w-50"
+                    placeholder="Add Topic..."
+                    type="text"
+                    disabled="true"
+                    value={startDateTime}
+                    minLength="5"
+                    onChange={(e) => {
+                      setTravelerNIC(e.target.value);
+                    }}
+                    required
+                  />
+                </div>
+                <div className="row w-75  mx-auto mt-3">
+                  <strong
+                    style={{ marginLeft: -9 }}
+                    className="col-sm-4 col-form-label"
+                  >
+                    Arrival time
+                  </strong>
+                  <input
+                    name="topic"
+                    style={{ marginLeft: 9 }}
+                    className="form-control w-50"
+                    placeholder="Add Topic..."
+                    type="text"
+                    disabled="true"
+                    value={destinationDateTime}
+                    minLength="5"
+                    onChange={(e) => {
+                      setTravelerNIC(e.target.value);
+                    }}
+                    required
+                  />
+                </div>
+
+                <div className="row w-75  mx-auto mt-3">
+                  <strong
+                    style={{ marginLeft: -9 }}
+                    className="col-sm-4  col-form-label"
                   >
                     NIC
                   </strong>
                   <input
                     name="topic"
                     style={{ marginLeft: 9 }}
-                    className="form-control w-75"
+                    className="form-control w-50"
                     placeholder="Add Topic..."
                     type="text"
-                      value={travelerNIC}
-                      minLength="5"
-                      onChange={(e) => {
-                        setTravelerNIC(e.target.value);
-                      }}
+                    value={travelerNIC}
+                    minLength="5"
+                    onChange={(e) => {
+                      setTravelerNIC(e.target.value);
+                    }}
                     required
                   />
                 </div>
 
-                <div className="row w-50  mx-auto mt-3">
+                <div className="row w-75  mx-auto mt-3">
                   <strong
                     style={{ marginLeft: -9 }}
-                    className="col-sm-3  col-form-label"
+                    className="col-sm-4  col-form-label"
                   >
                     Seats
                   </strong>
                   <input
                     name="topic"
                     style={{ marginLeft: 9 }}
-                    className="form-control w-75"
+                    className="form-control w-50"
                     placeholder="Add Topic..."
                     type="number"
-                      value={seats}
-                      minLength="5"
-                      onChange={(e) => {
-                        setSeats(e.target.value);
-                      }}
+                    value={seats}
+                    minLength="5"
+                    onChange={(e) => {
+                      setSeats(e.target.value);
+                    }}
                     required
                   />
                 </div>
-
-               
-
                 <div
                   className="row w-50 mx-auto mt-3 mb-4 "
                   style={{ borderRadius: 30 }}
@@ -141,7 +221,6 @@ const UpdateReservation = () => {
             </form>
           </div>
         </div>
-        
       </div>
     </div>
   );

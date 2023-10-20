@@ -98,7 +98,7 @@ const ScheduleForm = () => {
             <form onSubmit={submitTrain}>
               <div>
                 <h1 className="mt-3">Add Train schedule</h1>
-                <div className="row col-sm-8 border mx-auto mt-4 ">
+                <div className="row col-sm-8 mx-auto mt-4 ">
                   <strong
                     style={{ marginLeft: -9 }}
                     className="col-sm-3  col-form-label"
@@ -120,7 +120,7 @@ const ScheduleForm = () => {
                   />
                 </div>
 
-                <div className="row col-sm-8 border mx-auto mt-3">
+                <div className="row col-sm-8 mx-auto mt-3">
                   <strong
                     style={{ marginLeft: -9 }}
                     className="col-sm-3  col-form-label"
@@ -187,7 +187,7 @@ const ScheduleForm = () => {
 
                 <div
                   className="row w-50 mx-auto mt-3 mb-4 "
-                  style={{ borderRadius: 30 }}
+                  style={{ Radius: 30 }}
                 >
                   <input
                     className="btn btn-primary mt-4 mx-auto shadow-lg"

@@ -5,8 +5,8 @@ const NavBar = () => {
   return (
     <div>
       <div
-        class="navbar navbar-expand-lg text-white"
-        style={{ backgroundColor: "#3ed40f" }}
+        class="navbar navbar-expand-lg bg-primary "
+        // style={{ backgroundColor: "#3ed40f" }}
       >
         <div class="container-fluid text-white">
           <a class="navbar-brand text-white" href="#">

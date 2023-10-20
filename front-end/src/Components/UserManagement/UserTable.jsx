@@ -111,7 +111,6 @@ const UserTable = () => {
                         <th scope="col">Nic</th>
                         <th scope="col">Role</th>
                         <th scope="col">Action</th>
-                        <th></th>
                       </tr>
                     </thead>
                     <tbody>

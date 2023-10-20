@@ -86,14 +86,21 @@ const ViewAllSchedules = () => {
   };
 
   return (
-    <div className="p-3">
-      <div className=" boxnotice card text-center p-3 mt-1">
-        <h1> Train Schedules</h1>
+    <div>
+      <div>
+        <img
+          src="https://www.atpi.com/media/cache/picture/35a05bdfc8e6aa40d1c9798e355cefdb.webp"
+          alt="Hero Image"
+          className="img-fluid w-100"
+        />
+      </div>
 
+      <div>
         <div>
-          <div className="container p-1 mt-4 mb-4">
+          <div className="container p-1 mb-4" style={{ marginTop: -400 }}>
             <div className="row ">
               <div className="shadow-lg card mx-auto w-100">
+                <h1 className="mt-3"> Train Schedules</h1>
                 <div className=" container d-flex flex-row">
                   <input
                     type="text"
