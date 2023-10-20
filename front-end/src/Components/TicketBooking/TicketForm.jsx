@@ -85,7 +85,7 @@ const TicketForm = () => {
     <div>
       <div className="row">
         <div
-          class="card  text-bg-white adminNotice-table mb-3 mt-5 text-center"
+          class="card  mx-auto mt-5"
           style={{ maxWidth: 900, marginLeft: 180, borderRadius: 30 }}
         >
           <div class="card-body">

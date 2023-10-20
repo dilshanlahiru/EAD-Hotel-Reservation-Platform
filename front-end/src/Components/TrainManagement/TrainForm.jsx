@@ -16,7 +16,7 @@ const TrainForm = () => {
   useEffect(() => {
     if (trainId) {
       TrainService.getTrainById(trainId).then((response) => {
-        setId(response.id)
+        setId(response.id);
         setTrainName(response.trainName);
         setNote(response.note);
         console.log(response);
@@ -26,7 +26,7 @@ const TrainForm = () => {
 
   const submitTrain = (e) => {
     e.preventDefault();
-    const train = {id, trainName, status, note};
+    const train = { id, trainName, status, note };
 
     if (trainId) {
       TrainService.updateTrain(train).then((response) => {
@@ -44,24 +44,26 @@ const TrainForm = () => {
         });
     }
   };
-  
 
   return (
     <div>
+      <div className="background-trvelForm">
+        <img
+          className="background-imageTF"
+          src="https://images4.alphacoders.com/150/150168.jpg"
+          alt="Background Image"
+        />
+      </div>
       <div className="row">
-        <div
-          class="card  text-bg-white adminNotice-table mb-3 mt-5 text-center"
-          style={{ maxWidth: 900, marginLeft: 180, borderRadius: 30 }}
-        >
+        <div class="card  text-bg-white adminNotice-table mb-3 mt-5 text-center col-sm-6 mx-auto">
           <div class="card-body">
             <h2 class="card-title mt-1">Add Train</h2>
             <form onSubmit={submitTrain}>
               <div>
-                
-                <div className="row w-50  mx-auto mt-3">
+                <div className="row col-sm-8   mx-auto mt-3">
                   <strong
                     style={{ marginLeft: -9 }}
-                    className="col-sm-3  col-form-label"
+                    className="col-sm-3 col-form-label"
                   >
                     Train Name
                   </strong>
@@ -80,7 +82,7 @@ const TrainForm = () => {
                   />
                 </div>
 
-                <div className="row w-50  mx-auto mt-3">
+                <div className="row col-sm-8 mx-auto mt-3">
                   <strong
                     style={{ marginLeft: -3 }}
                     className="col-sm-3  col-form-label"
@@ -117,7 +119,6 @@ const TrainForm = () => {
             </form>
           </div>
         </div>
-        
       </div>
     </div>
   );

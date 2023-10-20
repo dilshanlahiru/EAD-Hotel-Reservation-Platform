@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
+import "../custom.css";
 import { useNavigate, useParams } from "react-router-dom";
 import TrainService from "../Service/TrainService";
 import Swal from "sweetalert2";
@@ -28,7 +29,7 @@ const ScheduleForm = () => {
     }
     if (scheduleId) {
       ScheduleService.getSchduleById(scheduleId).then((response) => {
-        setId(response.id)
+        setId(response.id);
         setStart(response.start);
         setStartDateTime(response.startDateTime);
         setDestination(response.destination);
@@ -41,7 +42,16 @@ const ScheduleForm = () => {
   const submitTrain = (e) => {
     e.preventDefault();
 
-    const train = {id, trainId, trainName, start, startDateTime, destination, destinationDateTime, status};
+    const train = {
+      id,
+      trainId,
+      trainName,
+      start,
+      startDateTime,
+      destination,
+      destinationDateTime,
+      status,
+    };
 
     if (scheduleId) {
       ScheduleService.updateSchedule(train).then((response) => {
@@ -59,32 +69,36 @@ const ScheduleForm = () => {
         });
     }
   };
-  
-  //console.log("data", (new Date("2023-10-11T18:50:57.742Z"), 'MMMM do yyyy, h:mm:ss a'));
 
-//   let date = new Date("2023-10-11T21:10:48.378Z");
-// /* Date format you have */
-// let dateMDY = `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`;
-// /* Date converted to MM-DD-YYYY format */
-// console.log("d1", date)
-// console.log("d2", dateMDY)
-
-console.log("d1", startDateTime)
-console.log("d2", destinationDateTime)
+  console.log("d1", startDateTime);
+  console.log("d2", destinationDateTime);
 
   return (
     <div>
+      <div>
+        <img
+          style={{ height: "300px" }}
+          src="https://www.atpi.com/media/cache/picture/35a05bdfc8e6aa40d1c9798e355cefdb.webp"
+          alt="Hero Image"
+          className="img-fluid w-100"
+        />
+      </div>
+
       <div className="row">
         <div
-          class="card  text-bg-white adminNotice-table mb-3 mt-5 text-center"
-          style={{ maxWidth: 900, marginLeft: 180, borderRadius: 30 }}
+          class="card text-bg-white w-50 adminNotice-table mb-5 text-center mx-auto shadow-lg"
+          style={{
+            maxWidth: 900,
+            marginLeft: 180,
+            borderRadius: 30,
+            marginTop: -130,
+          }}
         >
           <div class="card-body">
-            <h2 class="card-title mt-1">Add Schedule</h2>
             <form onSubmit={submitTrain}>
               <div>
-                
-                <div className="row w-50  mx-auto mt-3">
+                <h1 className="mt-3">Add Train schedule</h1>
+                <div className="row w-50  mx-auto mt-4 ">
                   <strong
                     style={{ marginLeft: -9 }}
                     className="col-sm-3  col-form-label"
@@ -106,22 +120,22 @@ console.log("d2", destinationDateTime)
                   />
                 </div>
 
-                <div className="row w-50  mx-auto mt-3">
+                <div className="row col-sm-8 border mx-auto mt-3">
                   <strong
                     style={{ marginLeft: -9 }}
-                    className="col-sm-3 col-form-label"
+                    className="col-sm-3 border col-form-label "
                   >
-                    Start DateTime
+                    Departure
                   </strong>
                   <input
                     name="dateTime"
                     className="form-control w-75"
                     placeholder="Add Topic..."
                     type="datetime-local"
-                      value={startDateTime}
-                      onChange={(e) => {
-                        setStartDateTime(e.target.value);
-                      }}
+                    value={startDateTime}
+                    onChange={(e) => {
+                      setStartDateTime(e.target.value);
+                    }}
                     style={{ marginLeft: 9 }}
                     required
                   />
@@ -135,7 +149,7 @@ console.log("d2", destinationDateTime)
                     End
                   </strong>
 
-                  <textarea
+                  <input
                     name="note"
                     style={{ marginLeft: 3 }}
                     className="form-control w-75"
@@ -155,17 +169,17 @@ console.log("d2", destinationDateTime)
                     style={{ marginLeft: -9 }}
                     className="col-sm-3 col-form-label"
                   >
-                    End DateTime
+                    Arrival
                   </strong>
                   <input
                     name="date"
                     className="form-control w-75"
                     placeholder="Add Topic..."
                     type="datetime-local"
-                      value={destinationDateTime}
-                      onChange={(e) => {
-                        setDestinationDateTime(e.target.value);
-                      }}
+                    value={destinationDateTime}
+                    onChange={(e) => {
+                      setDestinationDateTime(e.target.value);
+                    }}
                     style={{ marginLeft: 9 }}
                     required
                   />
@@ -185,7 +199,6 @@ console.log("d2", destinationDateTime)
             </form>
           </div>
         </div>
-        
       </div>
     </div>
   );

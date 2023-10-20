@@ -5,8 +5,8 @@ const NavBar = () => {
   return (
     <div>
       <nav class="navbar navbar-expand-lg navbar-light bg-primary">
-        <a class="navbar-brand" href="#">
-          TravelMEr
+        <a class="navbar-brand mx-5 text-white" href="#">
+          TravelME
         </a>
         <button
           class="navbar-toggler"
@@ -23,8 +23,17 @@ const NavBar = () => {
         <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
           <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             <li class="nav-item active">
-              <a class="nav-link" href="#">
-                Home <span class="sr-only">(current)</span>
+              <a class="nav-link text-white" href="/backOfficeHome">
+                Home <span class="sr-only"></span>
+              </a>
+            </li>
+            <li class="nav-item active">
+              <a
+                class="nav-link text-white"
+                style={{ marginLeft: 1100 }}
+                href="#"
+              >
+                Logout <span class="sr-only"></span>
               </a>
             </li>
           </ul>

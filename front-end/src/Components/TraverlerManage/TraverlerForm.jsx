@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import "../custom.css";
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -54,58 +55,27 @@ const TraverlerForm = () => {
 
   return (
     <div>
+      <div className="background-trvelForm">
+        <img
+          className="background-imageTF"
+          src="https://images4.alphacoders.com/150/150168.jpg"
+          alt="Background Image"
+        />
+      </div>
+      <div className="centered-text">
+        {/* <h1>Travellers Information Tab</h1> */}
+      </div>
       <div className="row ">
-        <div
-          class="card  text-bg-white adminNotice-table mb-3 mt-5 text-center mx-auto"
-          style={{ maxWidth: 900, borderRadius: 30 }}
-        >
+        <div class="card mx-auto  text-bg-white adminNotice-table mb-3 mt-5 text-center w-50">
           <div class="card-body">
             <h2 class="card-title mt-1">Add Traveller</h2>
+
             <form onSubmit={submitUser}>
               <div>
-                {/* <div className="row w-50  mx-auto mt-3">
-                  <strong
-                    style={{ marginLeft: -9 }}
-                    className="col-sm-3 col-form-label"
-                  >
-                    Date
-                  </strong>
-                  <input
-                    name="date"
-                    className="form-control w-75"
-                    placeholder="Add Topic..."
-                    type="date"
-                    //   value={date}
-                    //   onChange={(e) => {
-                    //     setDate(e.target.value);
-                    //   }}
-                    style={{ marginLeft: 9 }}
-                    required
-                  />
-
-                  <select class="form-select w-75" 
-                              aria-label="Default select example"
-                              value={module.value}
-                              required
-                              placeholder='SelectModule..'
-                              onChange={(e) => {setModule(e.target.value);}}>
-                              <option value="">select Module</option>
-                              <option value="SE3050-User Experiance Engineering">SE3050-User Experiance Engineering</option>
-                              <option value="SE3060-Application Framework">SE3060-Application Framework</option>
-                              <option value="SE3090-Softwre Architecture">SE3090-Softwre Architecture</option>
-                      </select>
-                </div> */}
-
-                <div className="row w-50  mx-auto mt-3">
-                  <strong
-                    style={{ marginLeft: -9 }}
-                    className="col-sm-3  col-form-label"
-                  >
-                    Name
-                  </strong>
+                <div className="row mx-auto col-sm-8 mt-3">
+                  <strong className="col-sm-3 col-form-label">Name</strong>
                   <input
                     name="name"
-                    style={{ marginLeft: 9 }}
                     className="form-control w-75"
                     placeholder="Add Name..."
                     type="text"
@@ -118,10 +88,10 @@ const TraverlerForm = () => {
                   />
                 </div>
 
-                <div className="row w-50  mx-auto mt-3">
+                <div className="row col-sm-8 mx-auto mt-3">
                   <strong
                     style={{ marginLeft: -9 }}
-                    className="col-sm-3  col-form-label"
+                    className="col-sm-3 col-form-label"
                   >
                     Email
                   </strong>
@@ -140,16 +110,10 @@ const TraverlerForm = () => {
                   />
                 </div>
 
-                <div className="row w-50  mx-auto mt-3">
-                  <strong
-                    style={{ marginLeft: -9 }}
-                    className="col-sm-3  col-form-label"
-                  >
-                    NIC
-                  </strong>
+                <div className="row mx-auto col-sm-8 mt-3">
+                  <strong className="col-sm-3  col-form-label">NIC</strong>
                   <input
                     name="name"
-                    style={{ marginLeft: 9 }}
                     className="form-control w-75"
                     placeholder="Add NIC..."
                     type="text"
@@ -162,16 +126,10 @@ const TraverlerForm = () => {
                   />
                 </div>
 
-                <div className="row w-50  mx-auto mt-3">
-                  <strong
-                    style={{ marginLeft: -9 }}
-                    className="col-sm-3  col-form-label"
-                  >
-                    Password
-                  </strong>
+                <div className="row col-sm-8 mx-auto mt-3">
+                  <strong className="col-sm-3 col-form-label">Password</strong>
                   <input
                     name="name"
-                    style={{ marginLeft: 9 }}
                     className="form-control w-75"
                     placeholder="Add Password..."
                     type="text"
@@ -184,10 +142,7 @@ const TraverlerForm = () => {
                   />
                 </div>
 
-                <div
-                  className="row w-50 mx-auto mt-3 mb-4 "
-                  style={{ borderRadius: 30 }}
-                >
+                <div className="row w-50 mx-auto mt-3 mb-4 ">
                   <input
                     className="btn btn-primary mt-4 mx-auto shadow-lg"
                     type="submit"

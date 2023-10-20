@@ -5,7 +5,6 @@ import { useNavigate, useParams, Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import ResavationService from "../Service/ResavationService";
 
-
 const TicketBookingTable = () => {
   const [search, setSearch] = useState("");
   const [scheduleList, setScheduleList] = useState([]);
@@ -18,20 +17,19 @@ const TicketBookingTable = () => {
     });
   }, []);
 
-  const formatDateTime =  (dateTimeString) => {
+  const formatDateTime = (dateTimeString) => {
     const dateObject = new Date(dateTimeString);
-  
-    const options = {
-      year: 'numeric',
-      month: 'numeric',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
-    };
-  
-    return dateObject.toLocaleString(undefined, options);
-  }
 
+    const options = {
+      year: "numeric",
+      month: "numeric",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    };
+
+    return dateObject.toLocaleString(undefined, options);
+  };
 
   return (
     <div className="p-3">
@@ -70,7 +68,6 @@ const TicketBookingTable = () => {
                       setSearch(e.target.value);
                     }}
                   />
-
                 </div>
                 <table class="table table-striped mt-3">
                   <thead className="table-primary">
@@ -83,35 +80,40 @@ const TicketBookingTable = () => {
                     </tr>
                   </thead>
                   <tbody>
-                  {resavationList?.filter((value) => {
-          if (search === "") {
-            return value;
-          } else if (
-            //value.id.toString(includes(search))
-            value.travelerNIC.toLowerCase().includes(search.toLowerCase()) || value.bookingDateTime.toLowerCase().includes(search.toLowerCase())
-          ) {
-            return value;
-          }
-          return 0;
-}).map((note) => (
-                    <tr key={note.id}>
-                      <td>{note.travelerNIC}</td>
-                      <td>{formatDateTime(note.bookingDateTime)}</td>
-                      <td>{note.seats}</td>
-                      <td>
-                        <Link
-                          className="btn btn-warning"
-                          to={`/bookingDetails/${note.id}`}
-                        >
-                          View Details &nbsp;
-                          <i class="fa fa-cog" aria-hidden="true"></i>
-                        </Link>
-                      </td>
-                      
-                     
-                    </tr>
-                  ))}
-                </tbody>
+                    {resavationList
+                      ?.filter((value) => {
+                        if (search === "") {
+                          return value;
+                        } else if (
+                          //value.id.toString(includes(search))
+                          value.travelerNIC
+                            .toLowerCase()
+                            .includes(search.toLowerCase()) ||
+                          value.bookingDateTime
+                            .toLowerCase()
+                            .includes(search.toLowerCase())
+                        ) {
+                          return value;
+                        }
+                        return 0;
+                      })
+                      .map((note) => (
+                        <tr key={note.id}>
+                          <td>{note.travelerNIC}</td>
+                          <td>{formatDateTime(note.bookingDateTime)}</td>
+                          <td>{note.seats}</td>
+                          <td>
+                            <Link
+                              className="btn btn-warning"
+                              to={`/bookingDetails/${note.id}`}
+                            >
+                              View Details &nbsp;
+                              <i class="fa fa-cog" aria-hidden="true"></i>
+                            </Link>
+                          </td>
+                        </tr>
+                      ))}
+                  </tbody>
                 </table>
                 <br></br>
               </div>

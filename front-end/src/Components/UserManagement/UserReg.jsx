@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import "../custom.css";
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -19,7 +20,7 @@ const UserReg = () => {
   useEffect(() => {
     if (userId) {
       UserService.getUserById(userId).then((response) => {
-        setId(response.id)
+        setId(response.id);
         setName(response.name);
         setEmail(response.email);
         setNic(response.nic);
@@ -29,13 +30,10 @@ const UserReg = () => {
     }
   }, []);
 
-  
-
-
   const submitUser = (e) => {
     e.preventDefault();
-    let role = parseInt(roleString)
-    const user = {id, name, email, password, nic, role, status};
+    let role = parseInt(roleString);
+    const user = { id, name, email, password, nic, role, status };
     console.log("u", user);
 
     if (userId) {
@@ -57,16 +55,25 @@ const UserReg = () => {
 
   return (
     <div>
+      <div>
+        <img
+          style={{ height: "300px" }}
+          src="https://www.atpi.com/media/cache/picture/35a05bdfc8e6aa40d1c9798e355cefdb.webp"
+          alt="Hero Image"
+          className="img-fluid w-100"
+        />
+      </div>
+      <div className="centered-text">
+        <h1>User Registration Tab</h1>
+      </div>
       <div className="row">
         <div
-          class="card  text-bg-white adminNotice-table mb-3 mt-5 text-center"
+          class="card  text-bg-white adminNotice-table mb-3 mt-5 text-center mx-auto shadow-lg"
           style={{ maxWidth: 900, marginLeft: 180, borderRadius: 30 }}
         >
           <div class="card-body">
-            <h2 class="card-title mt-1">Add User</h2>
-            <form
-               onSubmit={submitUser}
-            >
+            {/* <h2 class="card-title mt-1">Add User</h2> */}
+            <form onSubmit={submitUser}>
               <div>
                 <div className="row w-50  mx-auto mt-3">
                   <strong
@@ -79,7 +86,7 @@ const UserReg = () => {
                     name="name"
                     style={{ marginLeft: 9 }}
                     className="form-control w-75"
-                    placeholder="Add Topic..."
+                    placeholder="Add Name..."
                     type="text"
                     value={name}
                     minLength="5"
@@ -101,34 +108,12 @@ const UserReg = () => {
                     name="name"
                     style={{ marginLeft: 9 }}
                     className="form-control w-75"
-                    placeholder="Add Topic..."
+                    placeholder="Add Email..."
                     type="text"
                     value={email}
                     minLength="5"
                     onChange={(e) => {
                       setEmail(e.target.value);
-                    }}
-                    required
-                  />
-                </div>
-
-                <div className="row w-50  mx-auto mt-3">
-                  <strong
-                    style={{ marginLeft: -9 }}
-                    className="col-sm-3  col-form-label"
-                  >
-                    Password
-                  </strong>
-                  <input
-                    name="name"
-                    style={{ marginLeft: 9 }}
-                    className="form-control w-75"
-                    placeholder="Add Topic..."
-                    type="text"
-                    value={password}
-                    minLength="5"
-                    onChange={(e) => {
-                      setPassword(e.target.value);
                     }}
                     required
                   />
@@ -145,7 +130,7 @@ const UserReg = () => {
                     name="name"
                     style={{ marginLeft: 9 }}
                     className="form-control w-75"
-                    placeholder="Add Topic..."
+                    placeholder="Add NIC..."
                     type="text"
                     value={nic}
                     minLength="5"
@@ -156,7 +141,29 @@ const UserReg = () => {
                   />
                 </div>
 
-                <div className="row w-50  mx-auto mt-5">
+                <div className="row w-50  mx-auto mt-3">
+                  <strong
+                    style={{ marginLeft: -9 }}
+                    className="col-sm-3  col-form-label"
+                  >
+                    Password
+                  </strong>
+                  <input
+                    name="name"
+                    style={{ marginLeft: 9 }}
+                    className="form-control w-75"
+                    placeholder="Add Password..."
+                    type="text"
+                    value={password}
+                    minLength="5"
+                    onChange={(e) => {
+                      setPassword(e.target.value);
+                    }}
+                    required
+                  />
+                </div>
+
+                <div className="row w-50  mx-auto mt-4 ">
                   <strong className="col-sm-3  col-form-label">Role</strong>
 
                   <select
@@ -165,21 +172,15 @@ const UserReg = () => {
                     value={roleString}
                     required
                     placeholder="SelectFaculty.."
-                      onChange={(e) => {
-                        setRoleString(e.target.value);
-                      }}
+                    onChange={(e) => {
+                      setRoleString(e.target.value);
+                    }}
                   >
                     <option value="">Select Role </option>
-                    <option value='0'>
-                      Back Office
-                    </option>
-                    <option value='1'>
-                      Travel Agent
-                    </option>
+                    <option value="0">Back Office</option>
+                    <option value="1">Travel Agent</option>
                   </select>
                 </div>
-
-                
 
                 <div
                   className="row w-50 mx-auto mt-3 mb-4 "
@@ -195,7 +196,6 @@ const UserReg = () => {
             </form>
           </div>
         </div>
-        
       </div>
     </div>
   );

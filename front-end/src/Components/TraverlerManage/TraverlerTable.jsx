@@ -210,13 +210,12 @@ const TraverlerTable = () => {
                               </Link>
 
                               <button
+                                style={{ width: 100 }}
                                 type="button"
                                 onClick={() => changeStatus(u.id, u.status)}
                                 class="btn btn-info"
                               >
-                                {" "}
-                                Change Status &nbsp;
-                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                {u.status == 0 ? "Deactivate" : "Activate"}
                               </button>
 
                               <button
@@ -224,9 +223,7 @@ const TraverlerTable = () => {
                                 onClick={() => deleteUser(u.id)}
                                 class="btn btn-danger"
                               >
-                                {" "}
-                                Delete &nbsp;
-                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                Delete
                               </button>
                             </td>
                           </tr>
