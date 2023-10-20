@@ -227,3 +227,12 @@ const UpdateReservation = () => {
 };
 
 export default UpdateReservation;
+//     {travelerNIC}
+//     {bookingDateTime}
+//     {seats}
+//     {start}
+//     {destination}
+//     {startDateTime}
+//     {destinationDateTime}
+//     {status}
+//     {trainName}
