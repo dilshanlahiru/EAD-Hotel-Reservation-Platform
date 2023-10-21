@@ -37,20 +37,22 @@ const TraverlerForm = () => {
     console.log("u", user);
 
     if (userId) {
-      UserService.updateUser(user).then((response) => {
-        console.log(response);
-        Swal.fire("Success", "Updated Successfully", "success");
-        navigate("/travellearTable");
-      }).catch((error) => {
-        //console.log(response);
-        console.log("bbb", error.response.data);
-        let m = error.response.data
-        Swal.fire({
-          icon: "error",
-          title: "Validation Error",
-          text: m,
+      UserService.updateUser(user)
+        .then((response) => {
+          console.log(response);
+          Swal.fire("Success", "Updated Successfully", "success");
+          navigate("/travellearTable");
+        })
+        .catch((error) => {
+          //console.log(response);
+          console.log("bbb", error.response.data);
+          let m = error.response.data;
+          Swal.fire({
+            icon: "error",
+            title: "Validation Error",
+            text: m,
+          });
         });
-      });;
     } else {
       UserService.createUser(user)
         .then((response) => {
@@ -61,7 +63,7 @@ const TraverlerForm = () => {
         .catch((error) => {
           //console.log(response);
           console.log("bbb", error.response.data);
-          let m = error.response.data
+          let m = error.response.data;
           Swal.fire({
             icon: "error",
             title: "Validation Error",
@@ -73,18 +75,22 @@ const TraverlerForm = () => {
 
   return (
     <div>
-      <div className="background-trvelForm">
+      <div>
         <img
-          className="background-imageTF"
-          src="https://images4.alphacoders.com/150/150168.jpg"
-          alt="Background Image"
+          style={{ height: "300px" }}
+          src="https://www.atpi.com/media/cache/picture/35a05bdfc8e6aa40d1c9798e355cefdb.webp"
+          alt="Hero Image"
+          className="img-fluid w-100"
         />
       </div>
       <div className="centered-text">
         {/* <h1>Travellers Information Tab</h1> */}
       </div>
       <div className="row ">
-        <div class="card mx-auto  text-bg-white adminNotice-table mb-3 mt-5 text-center w-50">
+        <div
+          class="card mx-auto  text-bg-white adminNotice-table mb-3  text-center w-50"
+          style={{ borderRadius: 30, marginTop: -125 }}
+        >
           <div class="card-body">
             <h2 class="card-title mt-1">Add Traveler</h2>
 
@@ -170,7 +176,7 @@ const TraverlerForm = () => {
                       setEmail(e.target.value);
                     }}
                     required
-                                      />
+                  />
                 </div>
 
                 <div className="row mx-auto col-sm-8 mt-3">

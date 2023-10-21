@@ -37,6 +37,13 @@ const LoginForm = () => {
 
   return (
     <div>
+      <div className="background-trvelForm">
+        <img
+          className="background-imageTF"
+          src="https://backiee.com/static/wpdb/wallpapers/1000x563/226194.jpg"
+          alt="Background Image"
+        />
+      </div>
       <div className="container">
         <div
           className="card mt-5 col-md-6 offset-md-3 offset-md-3"
