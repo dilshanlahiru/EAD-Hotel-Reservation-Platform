@@ -49,6 +49,12 @@ const UserReg = () => {
         })
         .catch((error) => {
           console.log(error);
+          let m = error.response.data;
+          Swal.fire({
+            icon: "error",
+            title: "Validation Error",
+            text: m,
+          });
         });
     }
   };

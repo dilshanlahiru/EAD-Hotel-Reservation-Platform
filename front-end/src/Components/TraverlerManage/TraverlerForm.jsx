@@ -168,8 +168,8 @@ const TraverlerForm = () => {
                     name="name"
                     style={{ marginLeft: 9 }}
                     className="form-control w-75"
-                    placeholder="Add Email..."
-                    type="text"
+                    placeholder="Enter your email"
+                    type="email"
                     value={email}
                     minLength="5"
                     onChange={(e) => {
@@ -184,8 +184,10 @@ const TraverlerForm = () => {
                   <input
                     name="name"
                     className="form-control w-75"
-                    placeholder="Add NIC..."
+                    placeholder="Enter your NIC number"
                     type="text"
+                    pattern="[A-Za-z0-9]{10}|[A-Za-z0-9]{11}"
+                    title="Please enter a value with either 10 or 11 characters (letters and/or numbers)."
                     value={nic}
                     minLength="5"
                     onChange={(e) => {
@@ -201,7 +203,7 @@ const TraverlerForm = () => {
                     name="name"
                     className="form-control w-75"
                     placeholder="Add Password..."
-                    type="text"
+                    type="password"
                     value={password}
                     minLength="5"
                     onChange={(e) => {
