@@ -17,6 +17,14 @@ const TrainTable = () => {
     });
   }, []);
 
+  const refresh = ()=>{
+    TrainService.getAllTrains().then((data) => {
+      setTrainList(data);
+      console.log(data);
+    });
+
+  }
+
   const deleteTrain = (trainId) => {
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
@@ -43,14 +51,72 @@ const TrainTable = () => {
               setTrainList(
                 trainList.filter((trainList) => trainList.id !== trainId)
               );
-            })
+              swalWithBootstrapButtons.fire(
+                "Deleted!",
+                "Train has been deleted.",
+                "success"
+              );
+            }).catch((error) => {
+              //console.log(response);
+              console.log("bbb", error.response.data);
+              let m = error.response.data
+              Swal.fire({
+                icon: "error",
+                title: "Validation Error",
+                text: m,
+              });
+            });
+
+          // swalWithBootstrapButtons.fire(
+          //   "Deleted!",
+          //   "Train has been deleted.",
+          //   "success"
+          // );
+        } else if (
+          /* Read more about handling dismissals below */
+          result.dismiss === Swal.DismissReason.cancel
+        ) {
+          swalWithBootstrapButtons.fire(
+            "Cancelled",
+            "Delete canceled",
+            "error"
+          );
+        }
+      });
+  };
+
+  const publishTrain = (trainId) => {
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: "btn btn-success",
+        cancelButton: "btn btn-danger",
+      },
+      buttonsStyling: false,
+    });
+
+    swalWithBootstrapButtons
+      .fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes",
+        cancelButtonText: "No",
+        reverseButtons: true,
+      })
+      .then((result) => {
+        if (result.isConfirmed) {
+          TrainService.publishTrain(trainId)
+            .then((res) => {
+              refresh();
+          })
             .catch((error) => {
               console.log(error);
             });
 
           swalWithBootstrapButtons.fire(
-            "Deleted!",
-            "Your file has been deleted.",
+            "Publish!",
+            "Train has been Published.",
             "success"
           );
         } else if (
@@ -59,7 +125,7 @@ const TrainTable = () => {
         ) {
           swalWithBootstrapButtons.fire(
             "Cancelled",
-            "Delete canceled",
+            "Canceled",
             "error"
           );
         }
@@ -77,7 +143,7 @@ const TrainTable = () => {
         />
       </div>
       <div className="centered-text">
-        <h1>Train Sceduals</h1>
+        <h1>Train Schedules</h1>
       </div>
 
       <div className="container-fluid">
@@ -110,6 +176,7 @@ const TrainTable = () => {
                       <tr>
                         <th scope="col">Train Name</th>
                         <th scope="col">Note</th>
+                        <th scope="col">Status</th>
                         <th scope="col">Actions</th>
                       </tr>
                     </thead>
@@ -132,6 +199,9 @@ const TrainTable = () => {
                           <tr key={t.id}>
                             <td>{t.trainName}</td>
                             <td>{t.note}</td>
+                            <td>
+                              {t.status == 0 ? "Active" : "Deactivate"}
+                            </td>
                             <td className="d-flex justify-content-sm-around">
                               <Link
                                 className="btn btn-primary"
@@ -139,6 +209,14 @@ const TrainTable = () => {
                               >
                                 Schedules
                               </Link>
+
+                              <button
+                                type="button"
+                                onClick={() => publishTrain(t.id)}
+                                class="btn btn-primary"
+                              >
+                                Publish
+                              </button>
 
                               <Link
                                 className="btn btn-warning"

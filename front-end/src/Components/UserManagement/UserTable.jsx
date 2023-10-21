@@ -48,7 +48,7 @@ const UserTable = () => {
 
           swalWithBootstrapButtons.fire(
             "Deleted!",
-            "Your file has been deleted.",
+            "User has been deleted.",
             "success"
           );
         } else if (

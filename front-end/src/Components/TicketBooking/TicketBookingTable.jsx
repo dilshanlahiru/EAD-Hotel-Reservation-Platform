@@ -48,11 +48,11 @@ const TicketBookingTable = () => {
               className="shadow-lg card mx-auto w-100"
               style={{ marginTop: -150 }}
             >
-              <h1 className="mt-4">All Resavations</h1>
+              <h1 className="mt-4">All Resavation List</h1>
               <div className=" container d-flex">
                 <input
                   type="text"
-                  placeholder="Search By Notice"
+                  placeholder="Search By NIC"
                   className="form-control mt-3 w-25 me-3"
                   onChange={(e) => {
                     setSearch(e.target.value);

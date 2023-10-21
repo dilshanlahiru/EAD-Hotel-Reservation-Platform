@@ -61,7 +61,7 @@ const ScheduleForm = () => {
     } else {
       ScheduleService.createSchedule(train)
         .then((response) => {
-          Swal.fire("Success", "Train Added Successfully", "success");
+          Swal.fire("Success", "Added Successfully", "success");
           navigate(`/scheduleTable/${trainId}`);
         })
         .catch((error) => {

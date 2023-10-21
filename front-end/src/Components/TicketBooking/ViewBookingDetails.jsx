@@ -38,6 +38,20 @@ const ViewBookingDetails = () => {
     }
   }, []);
 
+  const formatDateTime = (dateTimeString) => {
+    const dateObject = new Date(dateTimeString);
+
+    const options = {
+      year: "numeric",
+      month: "numeric",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    };
+
+    return dateObject.toLocaleString(undefined, options);
+  };
+
   console.log(id);
   console.log(travelerNIC);
   console.log(bookingDateTime);
@@ -145,7 +159,7 @@ const ViewBookingDetails = () => {
                   style={{ marginLeft: -9 }}
                   className="col-sm-5  col-form-label"
                 >
-                  {bookingDateTime}
+                  {formatDateTime(bookingDateTime)}  
                 </div>
               </div>
 
@@ -190,7 +204,7 @@ const ViewBookingDetails = () => {
                   style={{ marginLeft: -9 }}
                   className="col-sm-5  col-form-label"
                 >
-                  {startDateTime}
+                  {formatDateTime(startDateTime)}
                 </div>
               </div>
 
@@ -220,11 +234,11 @@ const ViewBookingDetails = () => {
                   style={{ marginLeft: -9 }}
                   className="col-sm-5  col-form-label"
                 >
-                  {destinationDateTime}
+                  {formatDateTime(destinationDateTime)}
                 </div>
               </div>
 
-              <div className="col-sm-8 row  mx-auto mt-3">
+              {/* <div className="col-sm-8 row  mx-auto mt-3">
                 <strong
                   style={{ marginLeft: -9 }}
                   className="col-sm-5 col-form-label"
@@ -237,7 +251,7 @@ const ViewBookingDetails = () => {
                 >
                   {status}
                 </div>
-              </div>
+              </div> */}
 
               <div className="col-sm-8 row  mx-auto mt-3">
                 <strong

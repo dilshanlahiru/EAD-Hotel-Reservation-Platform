@@ -40,6 +40,20 @@ const UpdateReservation = () => {
     }
   }, []);
 
+  const formatDateTime = (dateTimeString) => {
+    const dateObject = new Date(dateTimeString);
+
+    const options = {
+      year: "numeric",
+      month: "numeric",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    };
+
+    return dateObject.toLocaleString(undefined, options);
+  };
+
   console.log("scheduleId", scheduleId);
   console.log("resId", resId);
 
@@ -133,7 +147,7 @@ const UpdateReservation = () => {
                     placeholder="Add Topic..."
                     type="text"
                     disabled="true"
-                    value={startDateTime}
+                    value={formatDateTime(startDateTime)}
                     minLength="5"
                     onChange={(e) => {
                       setTravelerNIC(e.target.value);
@@ -155,7 +169,7 @@ const UpdateReservation = () => {
                     placeholder="Add Topic..."
                     type="text"
                     disabled="true"
-                    value={destinationDateTime}
+                    value={formatDateTime(destinationDateTime)}
                     minLength="5"
                     onChange={(e) => {
                       setTravelerNIC(e.target.value);

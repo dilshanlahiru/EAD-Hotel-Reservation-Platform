@@ -18,5 +18,8 @@ class TrainService{
     getTrainById(id){
         return axios.get(URL + '/' + id).then((resopnse)=>resopnse.data)
     }
+    publishTrain(id){
+        return axios.put(URL + '/active/'+ id);  
+    }
 }
 export default new TrainService();   

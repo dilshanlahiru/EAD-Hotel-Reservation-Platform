@@ -52,6 +52,20 @@ const TicketForm = () => {
     }
   }, []);
 
+  const formatDateTime = (dateTimeString) => {
+    const dateObject = new Date(dateTimeString);
+
+    const options = {
+      year: "numeric",
+      month: "numeric",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    };
+
+    return dateObject.toLocaleString(undefined, options);
+  };
+
   console.log("scheduleId", scheduleId);
   console.log("resId", resId);
 
@@ -157,7 +171,7 @@ const TicketForm = () => {
                     placeholder="Add Topic..."
                     type="text"
                     disabled="true"
-                    value={startDateTime}
+                    value={formatDateTime(startDateTime)}
                     minLength="5"
                     onChange={(e) => {
                       setTravelerNIC(e.target.value);
@@ -179,7 +193,7 @@ const TicketForm = () => {
                     placeholder="Add Topic..."
                     type="text"
                     disabled="true"
-                    value={destinationDateTime}
+                    value={formatDateTime(destinationDateTime)}
                     minLength="5"
                     onChange={(e) => {
                       setTravelerNIC(e.target.value);
@@ -198,7 +212,7 @@ const TicketForm = () => {
                     name="topic"
                     style={{ marginLeft: 9 }}
                     className="form-control w-50"
-                    placeholder="Add Topic..."
+                    placeholder="Add NIC..."
                     type="text"
                     value={travelerNIC}
                     minLength="5"

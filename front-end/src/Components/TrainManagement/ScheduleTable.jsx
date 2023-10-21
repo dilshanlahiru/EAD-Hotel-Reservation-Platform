@@ -62,7 +62,7 @@ const ScheduleTable = () => {
 
           swalWithBootstrapButtons.fire(
             "Deleted!",
-            "Your file has been deleted.",
+            "Schedule has been deleted.",
             "success"
           );
         } else if (
@@ -116,7 +116,7 @@ const ScheduleTable = () => {
                   <div className=" container d-flex flex-row">
                     <input
                       type="text"
-                      placeholder="Search By Train Name"
+                      placeholder="Search By From"
                       className="form-control mt-3 w-25"
                       onChange={(e) => {
                         setSearch(e.target.value);

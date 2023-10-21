@@ -17,6 +17,14 @@ const TraverlerTable = () => {
     });
   }, []);
 
+  const refresh = ()=>{
+    UserService.getAllTravelerUsers().then((data) => {
+      setUserList(data);
+      console.log(data);
+    });
+
+  }
+
   const deleteUser = (uId) => {
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
@@ -48,7 +56,7 @@ const TraverlerTable = () => {
 
           swalWithBootstrapButtons.fire(
             "Deleted!",
-            "Your file has been deleted.",
+            "Traveler has been deleted.",
             "success"
           );
         } else if (
@@ -79,8 +87,8 @@ const TraverlerTable = () => {
         text: "You won't be able to revert this!",
         icon: "warning",
         showCancelButton: true,
-        confirmButtonText: "Yes, delete it!",
-        cancelButtonText: "No, cancel!",
+        confirmButtonText: "Yes",
+        cancelButtonText: "No",
         reverseButtons: true,
       })
       .then((result) => {
@@ -88,27 +96,24 @@ const TraverlerTable = () => {
           if (status == 0) {
             UserService.updateStatus(userId, 1)
               .then((res) => {
-                setUserList(
-                  userList.filter((userList) => userList.id !== userId)
-                );
+                refresh();
               })
+              
               .catch((error) => {
                 console.log(error);
               });
           } else {
             UserService.updateStatus(userId, 0)
               .then((res) => {
-                setUserList(
-                  userList.filter((userList) => userList.id !== userId)
-                );
+                refresh();
               })
               .catch((error) => {
                 console.log(error);
               });
           }
           swalWithBootstrapButtons.fire(
-            "Deleted!",
-            "Your file has been deleted.",
+            "Success",
+            "Action Success.",
             "success"
           );
         } else if (
@@ -117,7 +122,7 @@ const TraverlerTable = () => {
         ) {
           swalWithBootstrapButtons.fire(
             "Cancelled",
-            "Delete canceled",
+            "Action canceled",
             "error"
           );
         }

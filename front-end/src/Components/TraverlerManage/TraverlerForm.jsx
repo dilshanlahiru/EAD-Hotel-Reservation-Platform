@@ -38,17 +38,35 @@ const TraverlerForm = () => {
 
     if (userId) {
       UserService.updateUser(user).then((response) => {
+        console.log(response);
         Swal.fire("Success", "Updated Successfully", "success");
         navigate("/travellearTable");
-      });
+      }).catch((error) => {
+        //console.log(response);
+        console.log("bbb", error.response.data);
+        let m = error.response.data
+        Swal.fire({
+          icon: "error",
+          title: "Validation Error",
+          text: m,
+        });
+      });;
     } else {
       UserService.createUser(user)
         .then((response) => {
+          console.log(response);
           Swal.fire("Success", "Added Successfully", "success");
           navigate("/travellearTable");
         })
         .catch((error) => {
-          console.log(error);
+          //console.log(response);
+          console.log("bbb", error.response.data);
+          let m = error.response.data
+          Swal.fire({
+            icon: "error",
+            title: "Validation Error",
+            text: m,
+          });
         });
     }
   };
@@ -68,7 +86,7 @@ const TraverlerForm = () => {
       <div className="row ">
         <div class="card mx-auto  text-bg-white adminNotice-table mb-3 mt-5 text-center w-50">
           <div class="card-body">
-            <h2 class="card-title mt-1">Add Traveller</h2>
+            <h2 class="card-title mt-1">Add Traveler</h2>
 
             <form onSubmit={submitUser}>
               <div>
@@ -87,6 +105,51 @@ const TraverlerForm = () => {
                     required
                   />
                 </div>
+
+                {/* {userId ? (<div className="row col-sm-8 mx-auto mt-3">
+                  <strong
+                    style={{ marginLeft: -9 }}
+                    className="col-sm-3 col-form-label"
+                  >
+                    Email
+                  </strong>
+                  <input
+                    name="name"
+                    style={{ marginLeft: 9 }}
+                    className="form-control w-75"
+                    placeholder="Add Email..."
+                    type="text"
+                    value={email}
+                    minLength="5"
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                    }}
+                    required
+                    readonly
+                  />
+                </div>) :
+                 (<div className="row col-sm-8 mx-auto mt-3">
+                 <strong
+                   style={{ marginLeft: -9 }}
+                   className="col-sm-3 col-form-label"
+                 >
+                   Email
+                 </strong>
+                 <input
+                   name="name"
+                   style={{ marginLeft: 9 }}
+                   className="form-control w-75"
+                   placeholder="Add Email..."
+                   type="text"
+                   value={email}
+                   minLength="5"
+                   onChange={(e) => {
+                     setEmail(e.target.value);
+                   }}
+                   required
+                   
+                 />
+               </div>)} */}
 
                 <div className="row col-sm-8 mx-auto mt-3">
                   <strong
@@ -107,7 +170,7 @@ const TraverlerForm = () => {
                       setEmail(e.target.value);
                     }}
                     required
-                  />
+                                      />
                 </div>
 
                 <div className="row mx-auto col-sm-8 mt-3">
