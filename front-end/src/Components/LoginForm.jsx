@@ -37,14 +37,9 @@ const LoginForm = () => {
 
   return (
     <div>
-      
       <div className="container">
-        <br />
-        <br />
-        <br />
-        <br />
         <div
-          className="card col-md-6 offset-md-3 offset-md-3"
+          className="card mt-5 col-md-6 offset-md-3 offset-md-3"
           style={{ borderRadius: 30 }}
         >
           <div className="card-body shadow-lg" style={{ borderRadius: 30 }}>
@@ -96,9 +91,9 @@ const LoginForm = () => {
               </div>
               <br />
               <div className="text-center">
-                Create An Account{" "}
+                Create An Account :
                 <Link to="/userReg" className="text-center">
-                  Sign up{" "}
+                  Sign up
                 </Link>
               </div>
               <br />

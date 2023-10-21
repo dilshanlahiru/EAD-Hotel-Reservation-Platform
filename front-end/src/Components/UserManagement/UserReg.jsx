@@ -75,7 +75,7 @@ const UserReg = () => {
           }}
         >
           <div class="card-body">
-            <h2 class="card-title mt-1">Add User</h2>
+            <h2 class="card-title mt-1">Sign Up</h2>
             <form onSubmit={submitUser}>
               <div>
                 <div className="row w-50  mx-auto mt-3">
@@ -89,7 +89,7 @@ const UserReg = () => {
                     name="name"
                     style={{ marginLeft: 9 }}
                     className="form-control w-75"
-                    placeholder="Add Name..."
+                    placeholder="Enter your name"
                     type="text"
                     value={name}
                     minLength="5"
@@ -111,8 +111,8 @@ const UserReg = () => {
                     name="name"
                     style={{ marginLeft: 9 }}
                     className="form-control w-75"
-                    placeholder="Add Email..."
-                    type="text"
+                    placeholder="Enter your email"
+                    type="email"
                     value={email}
                     minLength="5"
                     onChange={(e) => {
@@ -133,7 +133,9 @@ const UserReg = () => {
                     name="name"
                     style={{ marginLeft: 9 }}
                     className="form-control w-75"
-                    placeholder="Add NIC..."
+                    placeholder="Enter your NIC number"
+                    pattern="[A-Za-z0-9]{10}|[A-Za-z0-9]{11}"
+                    title="Please enter a value with either 10 or 11 characters (letters and/or numbers)."
                     type="text"
                     value={nic}
                     minLength="5"
@@ -155,8 +157,8 @@ const UserReg = () => {
                     name="name"
                     style={{ marginLeft: 9 }}
                     className="form-control w-75"
-                    placeholder="Add Password..."
-                    type="text"
+                    placeholder="Enter your Password"
+                    type="password"
                     value={password}
                     minLength="5"
                     onChange={(e) => {
@@ -192,7 +194,7 @@ const UserReg = () => {
                   <input
                     className="btn btn-primary mt-4 mx-auto shadow-lg"
                     type="submit"
-                    value="Save"
+                    value="Submit"
                   />
                 </div>
               </div>
