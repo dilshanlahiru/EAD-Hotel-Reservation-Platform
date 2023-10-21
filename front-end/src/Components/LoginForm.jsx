@@ -22,7 +22,7 @@ const LoginForm = () => {
         if (res.data.role == 0) {
           navigate("/backOfficeHome");
         } else if (res.data.role == 1) {
-          navigate("/travelAgenteHome");
+          navigate("/ticketBookingTable");
         }
       })
       .catch((err) => {
