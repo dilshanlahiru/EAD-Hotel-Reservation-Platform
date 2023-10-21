@@ -19,6 +19,7 @@ const TrainForm = () => {
         setId(response.id);
         setTrainName(response.trainName);
         setNote(response.note);
+        setStatus(response.status);
         console.log(response);
       });
     }

@@ -36,10 +36,10 @@ const TrainTable = () => {
     swalWithBootstrapButtons
       .fire({
         title: "Are you sure?",
-        text: "You won't be able to revert this!",
+        text: "Un-Publishing the Train!",
         icon: "warning",
         showCancelButton: true,
-        confirmButtonText: "Yes, delete it!",
+        confirmButtonText: "Yes, Un-Publish!",
         cancelButtonText: "No, cancel!",
         reverseButtons: true,
       })
@@ -47,12 +47,13 @@ const TrainTable = () => {
         if (result.isConfirmed) {
           TrainService.deleteTrain(trainId)
             .then((res) => {
-              setTrainList(
-                trainList.filter((trainList) => trainList.id !== trainId)
-              );
+              refresh();
+              // setTrainList(
+              //   trainList.filter((trainList) => trainList.id !== trainId)
+              // );
               swalWithBootstrapButtons.fire(
-                "Deleted!",
-                "Train has been deleted.",
+                "Un-published!",
+                "Train has been Unpublished.",
                 "success"
               );
             })
@@ -176,7 +177,6 @@ const TrainTable = () => {
                           if (search === "") {
                             return value;
                           } else if (
-                            //value.id.toString(includes(search))
                             value.trainName
                               .toLowerCase()
                               .includes(search.toLowerCase())
@@ -190,7 +190,7 @@ const TrainTable = () => {
                             <td>{t.trainName}</td>
                             <td>{t.note}</td>
                             <td>
-                              {t.status == 0 ? "Published" : "Unpublished"}
+                              {t.status === 0 ? "Published" : "Unpublished"}
                             </td>
                             <td className="d-flex justify-content-sm-around">
                               <Link
@@ -200,13 +200,23 @@ const TrainTable = () => {
                                 Schedules
                               </Link>
 
-                              <button
-                                type="button"
-                                onClick={() => publishTrain(t.id)}
-                                class="btn btn-primary"
-                              >
-                                Publish
-                              </button>
+                              {t.status === 0 ? (
+                                <button
+                                  type="button"
+                                  onClick={() => deleteTrain(t.id)}
+                                  className="btn btn-danger" // Display "Unpublish" button
+                                >
+                                  Unpublish
+                                </button>
+                              ) : (
+                                <button
+                                  type="button"
+                                  onClick={() => publishTrain(t.id)}
+                                  className="btn btn-success" // Display "Publish" button
+                                >
+                                  Publish
+                                </button>
+                              )}
 
                               <Link
                                 className="btn btn-warning"
@@ -214,14 +224,6 @@ const TrainTable = () => {
                               >
                                 Update
                               </Link>
-
-                              <button
-                                type="button"
-                                onClick={() => deleteTrain(t.id)}
-                                class="btn btn-danger"
-                              >
-                                Delete
-                              </button>
                             </td>
                           </tr>
                         ))}
