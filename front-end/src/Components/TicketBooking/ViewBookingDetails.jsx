@@ -91,12 +91,12 @@ const ViewBookingDetails = () => {
                 "Deleted!",
                 "Resavation has been deleted.",
                 "success"
-              )
+              );
             })
             .catch((error) => {
               //console.log(response);
               console.log("bbb", error.response.data.msg);
-              let m = error.response.data.msg
+              let m = error.response.data.msg;
               Swal.fire({
                 icon: "error",
                 title: "Validation Error",
@@ -147,7 +147,7 @@ const ViewBookingDetails = () => {
             <div>
               <div className="col-sm-8 row  mx-auto mt-3">
                 <strong
-                  style={{ marginLeft: -9 }}
+                  style={{ marginLeft: 75 }}
                   className="col-sm-3 col-form-label"
                 >
                   Traveler's NIC :
@@ -171,7 +171,7 @@ const ViewBookingDetails = () => {
                   style={{ marginLeft: -9 }}
                   className="col-sm-5  col-form-label"
                 >
-                  {formatDateTime(bookingDateTime)}  
+                  {formatDateTime(bookingDateTime)}
                 </div>
               </div>
 

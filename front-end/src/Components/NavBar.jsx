@@ -12,7 +12,7 @@ const NavBar = () => {
       >
         <div class="container-fluid text-white">
           <a class="navbar-brand text-white" href="#">
-            Navbar w/ text
+            SWIFT Rail
           </a>
           <button
             class="navbar-toggler"
@@ -27,31 +27,55 @@ const NavBar = () => {
           </button>
           <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a
-                  class="nav-link active"
-                  aria-current="page"
-                  href="/backOfficeHome"
-                >
-                  Home
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  Features
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  Pricing
-                </a>
-              </li>
+              {location.pathname !== "/" && (
+                <li class="nav-item text-white">
+                  <a
+                    class="nav-link active text-white"
+                    aria-current="page"
+                    href="/backOfficeHome"
+                  >
+                    Home
+                  </a>
+                </li>
+              )}
+
+              {location.pathname !== "/" && (
+                <li class="nav-item">
+                  <a class="nav-link text-white" href="travellearTable">
+                    Traverler Management
+                  </a>
+                </li>
+              )}
+
+              {location.pathname !== "/" && (
+                <li class="nav-item">
+                  <a class="nav-link text-white" href="/ticketBookingTable">
+                    Ticket Booking
+                  </a>
+                </li>
+              )}
+
+              {location.pathname !== "/" && (
+                <li class="nav-item">
+                  <a class="nav-link text-white" href="/userTable">
+                    User Management
+                  </a>
+                </li>
+              )}
+
+              {location.pathname !== "/" && (
+                <li class="nav-item">
+                  <a class="nav-link text-white" href="/trainTable">
+                    Train Management
+                  </a>
+                </li>
+              )}
             </ul>
             {location.pathname !== "/" && (
               <ul className="navbar-nav me-3 mb-2 mb-lg-0">
                 <li className="nav-item">
-                  <Link to="/" className="nav-link">
-                    LogOut
+                  <Link to="/" className="nav-link text-white">
+                    Logout
                   </Link>
                 </li>
               </ul>
