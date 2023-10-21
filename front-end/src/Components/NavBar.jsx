@@ -27,51 +27,56 @@ const NavBar = () => {
           </button>
           <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              {location.pathname !== "/" && (
-                <li class="nav-item text-white">
-                  <a
-                    class="nav-link active text-white"
-                    aria-current="page"
-                    href="/backOfficeHome"
-                  >
-                    Home
-                  </a>
-                </li>
-              )}
+              {location.pathname !== "/" &&
+                location.pathname !== "/userReg" && (
+                  <li class="nav-item text-white">
+                    <a
+                      class="nav-link active text-white"
+                      aria-current="page"
+                      href="/backOfficeHome"
+                    >
+                      Home
+                    </a>
+                  </li>
+                )}
 
-              {location.pathname !== "/" && (
-                <li class="nav-item">
-                  <a class="nav-link text-white" href="travellearTable">
-                    Traverler Management
-                  </a>
-                </li>
-              )}
+              {location.pathname !== "/" &&
+                location.pathname !== "/userReg" && (
+                  <li class="nav-item">
+                    <a class="nav-link text-white" href="travellearTable">
+                      Traverler Management
+                    </a>
+                  </li>
+                )}
 
-              {location.pathname !== "/" && (
-                <li class="nav-item">
-                  <a class="nav-link text-white" href="/ticketBookingTable">
-                    Ticket Booking
-                  </a>
-                </li>
-              )}
+              {location.pathname !== "/" &&
+                location.pathname !== "/userReg" && (
+                  <li class="nav-item">
+                    <a class="nav-link text-white" href="/ticketBookingTable">
+                      Ticket Booking
+                    </a>
+                  </li>
+                )}
 
-              {location.pathname !== "/" && (
-                <li class="nav-item">
-                  <a class="nav-link text-white" href="/userTable">
-                    User Management
-                  </a>
-                </li>
-              )}
+              {location.pathname !== "/" &&
+                location.pathname !== "/userReg" && (
+                  <li class="nav-item">
+                    <a class="nav-link text-white" href="/userTable">
+                      User Management
+                    </a>
+                  </li>
+                )}
 
-              {location.pathname !== "/" && (
-                <li class="nav-item">
-                  <a class="nav-link text-white" href="/trainTable">
-                    Train Management
-                  </a>
-                </li>
-              )}
+              {location.pathname !== "/" &&
+                location.pathname !== "/userReg" && (
+                  <li class="nav-item">
+                    <a class="nav-link text-white" href="/trainTable">
+                      Train Management
+                    </a>
+                  </li>
+                )}
             </ul>
-            {location.pathname !== "/" && (
+            {location.pathname !== "/" && location.pathname !== "/userReg" && (
               <ul className="navbar-nav me-3 mb-2 mb-lg-0">
                 <li className="nav-item">
                   <Link to="/" className="nav-link text-white">
