@@ -1,7 +1,9 @@
 import React from "react";
 import "./custom.css";
+import { Link, useLocation } from "react-router-dom"; // Import useLocation
 
 const NavBar = () => {
+  const location = useLocation();
   return (
     <div>
       <div
@@ -45,13 +47,15 @@ const NavBar = () => {
                 </a>
               </li>
             </ul>
-            <ul class="navbar-nav me-3 mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">
-                  LogOut
-                </a>
-              </li>
-            </ul>
+            {location.pathname !== "/" && (
+              <ul className="navbar-nav me-3 mb-2 mb-lg-0">
+                <li className="nav-item">
+                  <Link to="/" className="nav-link">
+                    LogOut
+                  </Link>
+                </li>
+              </ul>
+            )}
           </div>
         </div>
       </div>

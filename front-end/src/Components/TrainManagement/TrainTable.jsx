@@ -17,13 +17,12 @@ const TrainTable = () => {
     });
   }, []);
 
-  const refresh = ()=>{
+  const refresh = () => {
     TrainService.getAllTrains().then((data) => {
       setTrainList(data);
       console.log(data);
     });
-
-  }
+  };
 
   const deleteTrain = (trainId) => {
     const swalWithBootstrapButtons = Swal.mixin({
@@ -56,22 +55,17 @@ const TrainTable = () => {
                 "Train has been deleted.",
                 "success"
               );
-            }).catch((error) => {
+            })
+            .catch((error) => {
               //console.log(response);
               console.log("bbb", error.response.data);
-              let m = error.response.data
+              let m = error.response.data;
               Swal.fire({
                 icon: "error",
                 title: "Validation Error",
                 text: m,
               });
             });
-
-          // swalWithBootstrapButtons.fire(
-          //   "Deleted!",
-          //   "Train has been deleted.",
-          //   "success"
-          // );
         } else if (
           /* Read more about handling dismissals below */
           result.dismiss === Swal.DismissReason.cancel
@@ -109,7 +103,7 @@ const TrainTable = () => {
           TrainService.publishTrain(trainId)
             .then((res) => {
               refresh();
-          })
+            })
             .catch((error) => {
               console.log(error);
             });
@@ -123,11 +117,7 @@ const TrainTable = () => {
           /* Read more about handling dismissals below */
           result.dismiss === Swal.DismissReason.cancel
         ) {
-          swalWithBootstrapButtons.fire(
-            "Cancelled",
-            "Canceled",
-            "error"
-          );
+          swalWithBootstrapButtons.fire("Cancelled", "Canceled", "error");
         }
       });
   };
@@ -151,7 +141,7 @@ const TrainTable = () => {
           <div>
             <div className="container p-1 mt-4 mb-4">
               <div className="row ">
-                <div className="shadow-lg card border-bottom border-primary mx-auto w-100">
+                <div className="shadow-lg card  mx-auto w-100">
                   <div className=" container d-flex flex-row">
                     <input
                       type="text"
@@ -200,7 +190,7 @@ const TrainTable = () => {
                             <td>{t.trainName}</td>
                             <td>{t.note}</td>
                             <td>
-                              {t.status == 0 ? "Active" : "Deactivate"}
+                              {t.status == 0 ? "Published" : "Unpublished"}
                             </td>
                             <td className="d-flex justify-content-sm-around">
                               <Link

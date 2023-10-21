@@ -47,15 +47,19 @@ const TrainForm = () => {
 
   return (
     <div>
-      <div className="background-trvelForm">
+      <div>
         <img
-          className="background-imageTF"
-          src="https://images4.alphacoders.com/150/150168.jpg"
-          alt="Background Image"
+          style={{ height: "300px" }}
+          src="https://www.atpi.com/media/cache/picture/35a05bdfc8e6aa40d1c9798e355cefdb.webp"
+          alt="Hero Image"
+          className="img-fluid w-100"
         />
       </div>
       <div className="row">
-        <div class="card  text-bg-white adminNotice-table mb-3 mt-5 text-center col-sm-6 mx-auto">
+        <div
+          class="card  text-bg-white adminNotice-table mb-3 shadow-lg text-center col-sm-6 mx-auto"
+          style={{ borderRadius: 30, marginTop: -125 }}
+        >
           <div class="card-body">
             <h2 class="card-title mt-1">Add Train</h2>
             <form onSubmit={submitTrain}>
@@ -87,14 +91,14 @@ const TrainForm = () => {
                     style={{ marginLeft: -3 }}
                     className="col-sm-3  col-form-label"
                   >
-                    Note
+                    Type
                   </strong>
 
-                  <textarea
+                  <input
                     name="note"
                     style={{ marginLeft: 3 }}
                     className="form-control w-75"
-                    placeholder="Add notice...."
+                    placeholder="Add Type."
                     type="text"
                     value={note}
                     minLength="5"
