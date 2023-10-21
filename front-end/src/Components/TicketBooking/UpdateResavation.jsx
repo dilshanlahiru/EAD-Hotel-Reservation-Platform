@@ -66,6 +66,15 @@ const UpdateReservation = () => {
       ResavationService.updateReservation(booking).then((response) => {
         Swal.fire("Success", "Updated Successfully", "success");
         navigate("/ticketBookingTable");
+      }).catch((error) => {
+        console.log(error);
+        console.log("bbb", error.response.data.msg);
+        let m = error.response.data.msg
+        Swal.fire({
+          icon: "error",
+          title: "Validation Error",
+          text: m,
+        });
       });
     }
   };

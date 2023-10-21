@@ -86,17 +86,29 @@ const ViewBookingDetails = () => {
         if (result.isConfirmed) {
           ResavationService.deleteResavation(revationId)
             .then((res) => {
-              navigate("ticketBookingTable");
+              navigate("/ticketBookingTable");
+              swalWithBootstrapButtons.fire(
+                "Deleted!",
+                "Resavation has been deleted.",
+                "success"
+              )
             })
             .catch((error) => {
-              console.log(error);
+              //console.log(response);
+              console.log("bbb", error.response.data.msg);
+              let m = error.response.data.msg
+              Swal.fire({
+                icon: "error",
+                title: "Validation Error",
+                text: m,
+              });
             });
 
-          swalWithBootstrapButtons.fire(
-            "Deleted!",
-            "Your file has been deleted.",
-            "success"
-          );
+          // swalWithBootstrapButtons.fire(
+          //   "Deleted!",
+          //   "Resavation has been deleted.",
+          //   "success"
+          // );
         } else if (
           /* Read more about handling dismissals below */
           result.dismiss === Swal.DismissReason.cancel
