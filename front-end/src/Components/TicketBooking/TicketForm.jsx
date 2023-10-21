@@ -93,8 +93,15 @@ const TicketForm = () => {
           navigate("/ticketBookingTable");
         })
         .catch((error) => {
-          console.log(error);
-        });
+          //console.log(response);
+          console.log("bbb", error.response.data);
+          let m = error.response.data.msg
+          Swal.fire({
+            icon: "error",
+            title: "Validation Error",
+            text: m,
+          });
+        });;
     }
   };
 
